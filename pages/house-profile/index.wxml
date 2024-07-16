@@ -1,0 +1,188 @@
+<view class="page-background">
+  <view class="house-profile">
+    <view class="hp-header">
+      <t-image
+        class="hp-header-img"
+        src="{{userInfo.avatar}}"
+        shape="circle"
+      />
+      <view class="hp-header-info">
+        <view class="hp-header-name"> {{ userInfo.name }} </view>
+        <view class="hp-header-tags">
+          <view
+            class="hp-header-tag"
+            wx:for="{{userInfo.tags}}"
+            wx:key="index"
+          >
+            {{ item }}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="house-swiper-container">
+      <t-swiper
+        current="{{current}}"
+        autoplay="{{autoplay}}"
+        duration="{{duration}}"
+        interval="{{interval}}"
+        navigation="{{ { type: 'dots' } }}"
+        list="{{swiperList}}"
+        height="320"
+        bind:click="onTap"
+      >
+      </t-swiper>
+    </view>
+
+    <view class="house-info">
+      <view class="hi-details">
+        <view
+          class="hi-details-item"
+          wx:for="{{houseInfo.details}}"
+          wx:key="index"
+        >
+          <view class="hid-item-value">
+            <view
+              style="font-size: 18rpx; margin-right: 4rpx; margin-bottom: 6rpx"
+              wx:if="{{ item.label === '月租'}}"
+              >S$</view
+            >
+            <view>{{ item.value }}</view>
+            <view wx:if="{{ item.label === '面积'}}">㎡</view>
+          </view>
+
+          <view class="hid-item-label"> {{ item.label}} </view>
+        </view>
+      </view>
+
+      <t-divider style="margin: 0" />
+
+      <view class="hi-content">
+        <view class="hi-title"> {{ houseInfo.title}} </view>
+        <view class="hi-desc"> {{ houseInfo.desc}}</view>
+      </view>
+
+      <view class="hi-facility">
+        <view class="hif-title"> 房间设施 </view>
+        <view class="hif-list">
+          <view
+            class="hif-item"
+            wx:for="{{houseInfo.facilities}}"
+            wx:key="index"
+          >
+            <t-image
+              class="hif-item-image"
+              src="{{item.image}}"
+            ></t-image>
+            <view class="hif-item-name">{{item.name}}</view>
+          </view>
+        </view>
+      </view>
+      <t-divider style="margin: 0; margin-top: 40rpx" />
+
+      <view class="hi-location">
+        <view class="hil-title">位置信息</view>
+        <view class="hil-map">
+          <map
+            id="myMap"
+            style="width: 100%; height: 360rpx"
+            latitude="{{latitude}}"
+            longitude="{{longitude}}"
+            markers="{{markers}}"
+            bindtap="handleMarketTap"
+            show-location
+          >
+          </map>
+        </view>
+      </view>
+    </view>
+
+    <view class="house-up">
+      <view class="hu-title"> TA的主页 </view>
+      <view class="hu-header">
+        <t-image
+          class="hu-header-img"
+          src="{{userInfo.avatar}}"
+          shape="circle"
+        />
+        <view class="hu-header-info">
+          <view class="hu-header-name-box">
+            <view class="hu-header-name">{{ userInfo.name }}</view>
+            <view class="hu-header-name-tag"> 官方 </view>
+          </view>
+          <view class="hu-header-tags-box">
+            <view class="hu-header-tags">
+              <view
+                class="hu-header-tag"
+                wx:for="{{userInfo.tags}}"
+                wx:key="index"
+              >
+                {{ item }}
+              </view>
+            </view>
+
+            <t-image
+              style="width: 30rpx; height: 30rpx"
+              src="/assets/images/house/go_user.png"
+            ></t-image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="house-bottom">
+    <view class="hb-input">
+      <t-input
+        placeholder="说点什么"
+        borderless="{{true}}"
+      />
+    </view>
+
+    <view class="hb-center">
+      <view class="hbc-item">
+        <t-image
+          style="width: 34rpx; height: 30rpx"
+          src="/assets/images/house/heart-select.png"
+          wx:if="{{houseInfo.is_like}}"
+          data-item="like"
+          bind:tap="handleHouseUserOpreation"
+        />
+        <t-image
+          style="width: 34rpx; height: 30rpx"
+          src="/assets/images/house/heart.png"
+          wx:else
+          data-item="unLike"
+          bind:tap="handleHouseUserOpreation"
+        />
+      </view>
+      <view class="hbc-item">
+        <t-image
+          style="width: 34rpx; height: 34rpx"
+          src="/assets/images/house/star-select.png"
+          wx:if="{{houseInfo.is_collect}}"
+          data-item="collect"
+          bind:tap="handleHouseUserOpreation"
+        />
+        <t-image
+          style="width: 34rpx; height: 34rpx"
+          src="/assets/images/house/star.png"
+          wx:else
+          data-item="unCollect"
+          bind:tap="handleHouseUserOpreation"
+        />
+      </view>
+      <view class="hbc-item">
+        <t-image
+          style="width: 30rpx; height: 31rpx"
+          src="/assets/images/house/forward.png"
+          data-item="forward"
+          bind:tap="handleHouseUserOpreation"
+        />
+      </view>
+    </view>
+    <view class="hb-right">
+      <t-button>预定</t-button>
+    </view>
+  </view>
+</view>

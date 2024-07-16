@@ -1,0 +1,95 @@
+<view>
+  <view class="example-search">
+    <t-search
+      model:value="{{name}}"
+      center
+      placeholder="待完成页面"
+      bind:change="onChange"
+      bind:clear="onChange"
+    />
+  </view>
+  <scroll-view
+    class="scroll-view"
+    scroll-y
+    style="height: calc(100vh - 260rpx)"
+    bindscrolltolower="onReachBottom"
+  >
+    <!-- 页面内容 -->
+    <!-- <t-cell
+      class="mb-16"
+      title="课程状态"
+      arrow
+      hover
+      note="{{statusText}}"
+      bind:click="onStatusPicker"
+    />
+
+    <t-cell
+      class="mb-16"
+      title="课程类型"
+      arrow
+      hover
+      note="{{typeText}}"
+      bind:click="onTypePicker"
+    /> -->
+
+    <!-- <t-picker
+      visible="{{statusVisible}}"
+      value="{{statusValue}}"
+      data-key="status"
+      title="选择课程状态"
+      cancelBtn="取消"
+      confirmBtn="确认"
+      bindchange="onPickerChange"
+      bindcancel="onPickerCancel"
+    >
+      <t-picker-item options="{{statusOptions}}" />
+    </t-picker>
+
+    <t-picker
+      visible="{{typeVisible}}"
+      value="{{typeValue}}"
+      data-key="type"
+      title="选择课程类型"
+      cancelBtn="取消"
+      confirmBtn="确认"
+      bindchange="onPickerChange"
+      bindcancel="onPickerCancel"
+    >
+      <t-picker-item options="{{typeOptions}}" />
+    </t-picker> -->
+
+    <t-cell
+      wx:for="{{videoListData}}"
+      wx:key="index"
+      title="{{item.title}}"
+      description="{{item.description}}"
+      bind:tap="handleVideoTap"
+      data-item="{{item}}"
+      hover
+      bordered
+    >
+      <view
+        slot="left-icon"
+        style="height: 100%; display: flex; align-items: center; justify-content: center"
+      >
+        <t-image
+          style="width: 200rpx; height: 200rpx"
+          src="/assets/images/cover_picture1.png"
+        ></t-image>
+      </view>
+      <view slot="description">
+        <t-progress
+          style="width: 90%"
+          percentage="{{item.progress}}"
+        />
+      </view>
+    </t-cell>
+    <view
+      class="loading"
+      wx:if="{{loading}}"
+    >
+      <text>加载中...</text>
+    </view>
+  </scroll-view>
+</view>

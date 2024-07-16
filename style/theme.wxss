@@ -1,0 +1,54 @@
+/* 主题定制 */
+.t-input {
+  --td-input-placeholder-text-color: #bbbbbb;
+  --td-input-text-color: #333333;
+}
+
+.t-tab-bar {
+  --td-tab-bar-color: #bbb;
+  --td-tab-bar-active-color: #333;
+}
+
+.t-cascader {
+  --td-cascader-active-color: #ffc82f;
+}
+
+.t-switch {
+  --td-switch-checked-color: #34c759;
+}
+
+.t-button {
+  --td-button-font-weight: 500;
+  --td-button-medium-font-size: 32rpx;
+  --td-button-default-color: #fff;
+  --td-button-default-bg-color: #ffc82f;
+  --td-button-default-border-color: #ffc82f;
+  --td-button-default-disabled-color: #fff;
+  --td-button-default-disabled-bg: #cccccc;
+  --td-button-default-disabled-border-color: #cccccc;
+  --td-button-default-active-bg-color: #ffc82f;
+  --td-button-default-active-border-color: #ffc82f;
+}
+
+.t-textarea {
+  --td-textarea-placeholder-color: #bbb;
+}
+
+.t-checkbox {
+  --td-checkbox-icon-checked-color: #ffc82f;
+}
+
+.dialog__button-confirm {
+  color: #ffc82f !important;
+}
+
+.dialog__button-cancel {
+  color: #aeb3b7 !important;
+}
+
+.t-dropdown-menu {
+  --td-dropdown-menu-colorm: #b3b3b3;
+  --td-dropdown-menu-font-sizem: 24rpx;
+  --td-dropdown-menu-icon-sizem: 30rpx;
+  --td-dropdown-menu-active-colorm: #ffc82f;
+}

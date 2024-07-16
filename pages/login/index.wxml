@@ -1,0 +1,46 @@
+<view class="page-background">
+  <view class="page-container">
+    <view class="input-example">
+      <view class="input-example__label"> 邮箱 </view>
+      <t-input
+        placeholder="请输入邮箱"
+        borderless="{{true}}"
+        style="{{style}}"
+        value="{{username}}"
+        bindchange="handleUsernameChange"
+      />
+    </view>
+    <view class="input-example">
+      <view class="input-example__label"> 密码 </view>
+      <t-input
+        type="password"
+        placeholder="请输入密码"
+        borderless="{{true}}"
+        style="{{style}}"
+        value="{{password}}"
+        bindchange="handlePasswordChange"
+      />
+      <view style="color: #ccc; margin-top: 10rpx">忘记密码请联系管理员修改</view>
+    </view>
+
+    <t-button
+      style="margin-top: 80rpx"
+      theme="primary"
+      block
+      size="large"
+      bind:tap="handleLogin"
+      >登录</t-button
+    >
+
+    <view style="margin-top: 200rpx; display: flex; align-items: center; justify-content: center">
+      <view style="color: #666;">还没有账号？</view>
+      <t-button
+        style="margin: 4rpx 20rpx 0 20rpx; padding: 0;"
+        theme="primary"
+        variant="text"
+        bind:tap="handleRegister"
+        >立即注册</t-button
+      >
+    </view>
+  </view>
+</view>

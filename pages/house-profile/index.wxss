@@ -1,0 +1,282 @@
+page {
+  box-sizing: border-box;
+}
+
+.house-profile {
+  background: #f7f8fa;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 92rpx);
+}
+
+.hp-header {
+  background-color: #fff;
+  padding: 24rpx 35rpx;
+  display: flex;
+}
+
+.hp-header-img {
+  width: 74rpx;
+  height: 74rpx;
+  margin-right: 20rpx;
+}
+
+.hp-header-name {
+  font-size: 24rpx;
+  font-weight: normal;
+  color: #353535;
+}
+
+.hp-header-tags {
+  display: flex;
+  margin-top: 8rpx;
+}
+
+.hp-header-tag {
+  padding: 4rpx 14rpx;
+  border-radius: 24px;
+  opacity: 1;
+  box-sizing: border-box;
+  border: 1rpx solid #d8d8d8;
+  font-size: 14rpx;
+  font-weight: normal;
+  color: #979797;
+  margin-right: 6rpx;
+}
+
+.house-swiper-container {
+  z-index: -1;
+  --td-swiper-radius: 0rpx;
+}
+
+.house-info {
+  width: 684rpx;
+  border-radius: 18rpx;
+  opacity: 1;
+  padding: 45rpx 35rpx;
+  box-sizing: border-box;
+  background: #ffffff;
+  margin: 0 auto;
+  margin-top: 44rpx;
+}
+
+.hi-details {
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr 2fr;
+}
+
+.hi-details-item {
+  margin-bottom: 30rpx;
+}
+
+.hid-item-value {
+  display: flex;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #000000;
+  align-items: flex-end;
+}
+
+.hid-item-label {
+  font-size: 18rpx;
+  font-weight: normal;
+  color: #979797;
+}
+
+.hi-content {
+  margin-top: 36rpx;
+}
+
+.hi-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #000000;
+}
+
+.hi-desc {
+  font-size: 26rpx;
+  font-weight: normal;
+  color: #3d3d3d;
+  line-height: 48rpx;
+  margin-top: 14rpx;
+}
+
+.hi-facility {
+  margin-top: 50rpx;
+}
+
+.hif-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #000000;
+}
+
+.hif-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.hif-item {
+  text-align: center;
+  margin-top: 44rpx;
+}
+
+.hif-item-name {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #6d6d6d;
+  margin-top: 9rpx;
+}
+
+.hif-item-image {
+  max-width: 50rpx;
+  max-height: 50rpx;
+}
+
+.hi-location {
+  margin-top: 56rpx;
+}
+
+.hil-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 23rpx;
+}
+
+.house-up {
+  width: 684rpx;
+  height: 180rpx;
+  border-radius: 18px;
+  opacity: 1;
+  margin: 0 auto;
+  background: #ffffff;
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+}
+
+.hu-title {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #000000;
+  padding-top: 20rpx;
+  margin-left: 34rpx;
+}
+
+.hu-header {
+  background-color: #fff;
+  padding: 24rpx 35rpx;
+  display: flex;
+}
+
+.hu-header-info {
+  flex-grow: 1;
+}
+
+.hu-header-img {
+  width: 74rpx;
+  height: 74rpx;
+  margin-right: 20rpx;
+}
+
+.hu-header-name-box {
+  display: flex;
+  align-items: center;
+}
+
+.hu-header-name-tag {
+  border-radius: 180rpx;
+  opacity: 1;
+  background: #ffc82f;
+  color: #ffffff;
+  padding: 4rpx 14rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+  margin-left: 20rpx;
+}
+
+.hu-header-name {
+  font-size: 24rpx;
+  font-weight: normal;
+  color: #353535;
+}
+
+
+.hu-header-tags-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8rpx;
+  width: 100%;
+}
+
+.hu-header-tags {
+  display: flex;
+}
+
+.hu-header-tag {
+  padding: 4rpx 14rpx;
+  border-radius: 24px;
+  opacity: 1;
+  box-sizing: border-box;
+  border: 1rpx solid #d8d8d8;
+  font-size: 14rpx;
+  font-weight: normal;
+  color: #979797;
+  margin-right: 6rpx;
+}
+
+.house-bottom {
+  position: fixed;
+  left: 0rpx;
+  bottom: 0rpx;
+  width: 100%;
+  height: 92rpx;
+  opacity: 1;
+  background: #ffffff;
+  padding: 0 40rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  display: flex;
+  align-items: center;
+}
+
+.hb-input .t-input {
+  --td-input-placeholder-text-color: #b3b3b3;
+  --td-font-size-m: 20rpx;
+  --td-input-vertical-padding: 24rpx;
+  width: 230rpx;
+  height: 44rpx;
+  border-radius: 80rpx;
+  opacity: 1;
+  box-sizing: border-box;
+  border: 2rpx solid rgba(179, 179, 179, 0.25);
+}
+
+.hb-center {
+  display: flex;
+  align-items: center;
+  margin-left: 68rpx;
+}
+
+.hbc-item {
+  display: flex;
+  align-items: center;
+  min-width: 32rpx;
+  margin-right: 26rpx;
+}
+
+.hb-right {
+  margin-left: 80rpx;
+}
+
+.hb-right .t-button {
+  width: 125rpx;
+  height: 45rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  --td-button-default-color: #000000;
+  --td-button-default-bg-color: #ffc82f;
+  --td-button-default-border-color: #ffc82f;
+  --td-button-default-active-bg-color: #ffd34e;
+  --td-button-default-active-border-color: #ffd34e;
+}

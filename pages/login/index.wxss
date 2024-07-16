@@ -1,0 +1,28 @@
+page {
+  box-sizing: border-box;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 96rpx);
+}
+
+.page-background {
+  background-color: #fff;
+}
+
+.page-container {
+  padding: 30rpx;
+}
+
+
+.input-example {
+  --td-input-vertical-padding: 24rpx;
+
+  background-color: #fff;
+  /* padding: 32rpx 32rpx 16rpx; */
+  margin-bottom: 50rpx;
+}
+
+.input-example__label {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 24rpx;
+  line-height: 40rpx;
+  margin: 10rpx 0;
+}

@@ -1,0 +1,15 @@
+page {
+  box-sizing: border-box;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 96rpx);
+}
+
+.my-grid-text {
+  font-size: 28rpx;
+  padding-top: 16rpx;
+}
+
+.my-grid-desc {
+  display: flex;
+  width: 80%;
+  flex: 1;
+}

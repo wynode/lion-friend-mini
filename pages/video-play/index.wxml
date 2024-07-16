@@ -1,0 +1,24 @@
+<view style="padding: 30rpx">
+  <view>
+    <video
+      id="myVideo"
+      src="{{videoInfo.url}}"
+      binderror="videoErrorCallback"
+      initial-time="{{initialTime}}"
+      controls
+      picture-in-picture-mode="{{['push', 'pop']}}"
+      bindtimeupdate="bindtimeupdate"
+      bindpause="bindpause"
+      style="width: 100%"
+    ></video>
+  </view>
+  <view style="margin-top: 40rpx; color: #000">{{ videoInfo.name }} </view>
+  <view style="margin-top: 40rpx; color: #666">{{ videoInfo.description }} </view>
+  <view style="display: flex; margin-top: 100rpx">
+    <view style="flex-shrink: 0">已学习进度：</view>
+    <t-progress
+      style="margin: 0 60rpx 0 20rpx; width: 100%"
+      percentage="{{progress}}"
+    />
+  </view>
+</view>

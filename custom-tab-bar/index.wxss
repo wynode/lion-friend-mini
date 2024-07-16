@@ -1,0 +1,17 @@
+.custom-tab-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.custom-tab-bar-wrapper .text {
+  font-size: 20rpx;
+  margin-top: 8rpx;
+  color: #b3b3b3;
+}
+
+.custom-tab-bar-wrapper .active-text {
+  font-size: 20rpx;
+  margin-top: 8rpx;
+  color: #ffc41f;
+}

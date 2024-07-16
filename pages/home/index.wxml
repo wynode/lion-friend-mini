@@ -1,0 +1,87 @@
+<view class="page-background">
+  <view class="home-swiper-container">
+    <t-swiper
+      current="{{current}}"
+      autoplay="{{autoplay}}"
+      duration="{{duration}}"
+      interval="{{interval}}"
+      navigation="{{ { type: 'dots' } }}"
+      list="{{swiperList}}"
+      bind:click="onTap"
+    >
+    </t-swiper>
+  </view>
+  <view class="home-service">
+    <t-row>
+      <t-col
+        span="12"
+        wx:for="{{serviceList}}"
+        wx:key="index"
+        data-item="{{item}}"
+        bind:tap="handleGoMenu"
+      >
+        <view class="home-service-item">
+          <t-image
+            class="hsi-image"
+            src="{{item.image}}"
+          ></t-image>
+          <view class="hsi-right">
+            <view class="hsi-right-top">{{item.name}}</view>
+            <view class="hsi-right-bottom">{{item.desc}}</view></view
+          >
+        </view>
+      </t-col>
+    </t-row>
+  </view>
+  <view class="home-notice-bar">
+    <t-notice-bar
+      visible="{{true}}"
+      prefixIcon="null"
+      direction="vertical"
+      interval="{{3000}}"
+      content="{{content}}"
+    ></t-notice-bar>
+  </view>
+
+  <view class="home-house-container">
+    <t-row gutter="14">
+      <t-col
+        span="12"
+        wx:for="{{houseList}}"
+        wx:key="index"
+        data-item="{{item}}"
+        bind:tap="handleGoHouseProfile"
+      >
+        <view class="home-house-item">
+          <view>
+            <t-image
+              mode="aspectFill"
+              class="home-house-image"
+              src="{{item.image}}"
+            ></t-image>
+          </view>
+          <view class="home-house-info">
+            <view>
+              <view class="home-house-title"> {{item.title}} </view>
+              <view class="home-house-desc"> {{ item.desc}}</view>
+            </view>
+            <view class="home-house-cost">
+              <view class="home-house-unit"> S$ </view>
+              <view class="home-house-price"> {{item.price}}/月 </view>
+            </view>
+            <view class="home-house-tags">
+              <view
+                class="home-house-tag"
+                wx:for="{{item.tags}}"
+                wx:for-index="tagIndex"
+                wx:for-item="tagItem"
+                wx:key="tagIndex"
+                >{{ tagItem}}</view
+              >
+            </view>
+          </view>
+        </view>
+      </t-col>
+    </t-row>
+  </view>
+</view>

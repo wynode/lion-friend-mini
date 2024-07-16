@@ -1,0 +1,10 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[wxml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[wxss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.documentSelectors": ["**/*.wxml", "**/*.wxss"]
+}

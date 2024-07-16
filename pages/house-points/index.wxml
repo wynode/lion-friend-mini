@@ -1,0 +1,49 @@
+<view class="page-background">
+  <view class="page-container">
+    <view class="intro-item">
+      <view class="intro-item-title">一、积分</view>
+      <view>
+        为回馈广大用户对小程序的支持与厚爱，我们特设立积分体系。用户可通过完成特定任务获取积分，积分可在小程序内兑换各种礼品，同时，成功促成交易的用户还将获得额外佣金，佣金可提现。
+      </view>
+    </view>
+
+    <t-divider style="background: #ffc82f"></t-divider>
+
+    <view class="intro-item">
+      <view class="intro-item-title">二、积分获取方式</view>
+      <view>
+        <view> 1.转发房源链接：</view>
+        用户每次成功转发房源链接至微信，即可获得一定数额的积分。 转发次数不限制，但转发给同一用户每日获得的积分有上限。
+      </view>
+      <view>
+        <view> 2.房源成交奖励：</view>
+        <view>若用户转发的房源链接最终促成交易，该用户将获得额外积分奖励。</view>
+
+        成交奖励积分数额将根据房源价值、交易金额等因素综合评定。
+      </view>
+    </view>
+    <t-divider style="background: #ffc82f"></t-divider>
+
+    <view class="intro-item">
+      <view class="intro-item-title">三、积分用途</view>
+      <view>
+        <view> 1.礼品兑换：</view>
+        用户可使用积分兑换各类礼品，包括但不限于实物商品、优惠券、服务体验等。礼品兑换需根据小程序内发布的礼品兑换规则进行，兑换后积分将相应扣除。
+      </view>
+      <view> 2.佣金提现：</view>
+      <view>成功促成交易的用户将获得一定比例的佣金。</view>
+      <view> 佣金可向管理员申请提现至个人银行账户，提现需遵循小程序制定的提现规则及流程。 </view>
+    </view>
+    <t-divider style="background: #ffc82f"></t-divider>
+
+    <view class="intro-item">
+      <view class="intro-item-title"> 四、积分规则说明</view>
+      <view> 1.积分有效期：积分自获取之日起，有效期为一年。过期未使用的积分将自动清零。</view>
+      <view> 2.积分查询：用户可在小程序内随时查询个人积分余额及明细。</view>
+      <view> 3.积分转让：积分不支持转让，仅限用户本人使用。</view>
+      <view>
+        4.违规处理：如发现用户通过不正当手段获取积分，如刷单、作弊等，小程序有权取消该用户积分，并视情节轻重采取进一步处理措施。
+      </view>
+    </view>
+  </view>
+</view>

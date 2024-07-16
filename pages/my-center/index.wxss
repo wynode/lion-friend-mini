@@ -1,0 +1,143 @@
+page {
+  box-sizing: border-box;
+  /* padding-bottom: calc(env(safe-area-inset-bottom) + 96rpx); */
+}
+
+.page-background {
+  background-color: #f7f8fa;
+}
+
+.page-container {
+  /* padding: 30rpx; */
+}
+
+.my-center-info {
+  padding-bottom: 26rpx;
+}
+
+.mci-header {
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mci-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.mcihl-info {
+  margin-left: 20rpx;
+}
+
+.mcihl-info-name {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 6rpx;
+}
+
+.mcihl-info-item {
+  font-size: 20rpx;
+  font-weight: normal;
+  color: #979797;
+}
+
+.mci-header-avatar {
+  width: 145rpx;
+  height: 145rpx;
+}
+
+.mci-header-right {
+  display: flex;
+}
+
+.mcihr-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 38rpx;
+}
+
+.mcihr-item-img {
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.mcihr-item-title {
+  font-size: 18rpx;
+  font-weight: normal;
+  color: #979797;
+  margin-top: 6rpx;
+}
+
+.mci-desc {
+  font-size: 20rpx;
+  font-weight: normal;
+  color: #6d6d6d;
+  margin-top: 23rpx;
+  padding: 0 68rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.mci-statis {
+  display: flex;
+  width: 685rpx;
+  height: 124rpx;
+  border-radius: 18rpx;
+  opacity: 1;
+  background: #ffffff;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24rpx;
+}
+
+.mcis-item {
+  margin-left: 104rpx;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mcis-item:first-child {
+  margin-left: 0;
+}
+
+.mcis-item-label {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #000000;
+  margin-top: 3rpx;
+}
+
+.mcis-item-value {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #969696;
+}
+
+.my-center-detail {
+  border-radius: 18rpx;
+  opacity: 1;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.custom-tabs {
+  --td-tab-item-active-color: #ffc41f;
+  --td-tab-track-color: #ffc41f;
+  --td-tab-font-size: 30rpx;
+  --td-tab-item-color: #000000;
+  font-weight: 500;
+}
+
+.custom-tabs .custom-tabs-acitve {
+  font-weight: 500 !important;
+}
