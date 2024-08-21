@@ -28,21 +28,22 @@ App({
       'content-type': 'application/json',
     },
   ) {
-    const that = this;
+    const customeHeader = { ...header };
+    const token = wx.getStorageSync('access');
+    if (token && !url.includes('/wx_token')) {
+      customeHeader.Authorization = `Bearer ${token}`;
+    }
     return new Promise((resolve, reject) => {
       wx.showLoading();
       wx.request({
-        url: `https://api.luminouscn.com${url}`,
-        method: method,
-        data: data,
-        header: {
-          ...header,
-          Authorization: url.includes('register') ? '' : `Bearer ${wx.getStorageSync('access')}`,
-        },
+        url: `https://lion-api.lzdss.sg${url}`,
+        method,
+        data,
+        header: customeHeader,
         success(res) {
           wx.hideLoading();
           // 请求成功处理
-          if (res.statusCode === 401 || res.statusCode === 404) {
+          if (res.statusCode === 401) {
             wx.showToast({
               icon: 'none',
               title: `未获取到用户登录信息，请重新登录`,

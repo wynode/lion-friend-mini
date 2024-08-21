@@ -1,0 +1,37 @@
+<view class="setting-container">
+  <t-cell-group bordered="{{false}}">
+    <t-cell title="隐私"> </t-cell>
+    <t-cell title="允许他人查看我的发布">
+      <t-switch
+        slot="note"
+        defaultValue="{{true}}"
+        bind:change="onSwitchChange"
+        data-key="viewPosts"
+      />
+    </t-cell>
+    <t-cell title="允许他人查看我的收藏">
+      <t-switch
+        slot="note"
+        defaultValue="{{false}}"
+        bind:change="onSwitchChange"
+        data-key="viewFavorites"
+      />
+    </t-cell>
+    <t-cell title="允许他人查看我的赞过">
+      <t-switch
+        slot="note"
+        defaultValue="{{true}}"
+        bind:change="onSwitchChange"
+        data-key="viewLikes"
+      />
+    </t-cell>
+    <t-cell title="允许他人查看我的粉丝与关注">
+      <t-switch
+        slot="note"
+        defaultValue="{{true}}"
+        bind:change="onSwitchChange"
+        data-key="viewFollowers"
+      />
+    </t-cell>
+  </t-cell-group>
+</view>

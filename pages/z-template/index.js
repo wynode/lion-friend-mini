@@ -10,9 +10,11 @@ Page({
   onLoad(options) {
     console.log(options);
     // const { id } = options || {};
+    // const { item } = e.currentTarget.dataset;
   },
 
   async handleInitPage() {
+    
     app.request(`/course/`).then((res) => {
       this.setData({
         res,

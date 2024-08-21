@@ -1,0 +1,58 @@
+<view class="profile-container">
+  <view class="">
+    <t-cell-group>
+      <t-cell
+        title="头像"
+        arrow
+        hover
+        bind:click="onEditAvatar"
+      >
+        <t-avatar
+          image="{{userInfo.avatar}}"
+          shape="circle"
+          size="large"
+          slot="note"
+        />
+      </t-cell>
+      <t-cell
+        title="昵称"
+        arrow
+        hover
+        note="{{userInfo.nickname}}"
+        bind:click="onEditNickname"
+      />
+      <t-cell
+        title="简介"
+        arrow
+        hover
+        note="{{userInfo.description}}"
+        bind:click="onEditDescription"
+      />
+      <t-cell
+        title="电话"
+        arrow
+        hover
+        note="{{userInfo.phone}}"
+        bind:click="onEditPhone"
+      />
+      <view class="description">
+        <text class="description-title">说明</text>
+        <view>
+          <view class="description-item">1. 不登记电话会使大部分功能受限，如发布、评论等；</view>
+          <view class="description-item"
+            >2. 登记电话用于追查违法违规人员，不会进行公开，任何人无法查看您保存的电话。</view
+          ></view
+        >
+      </view>
+    </t-cell-group>
+  </view>
+  <view class="footer">
+    <t-button
+      theme="primary"
+      block
+      size="large"
+      bind:tap="onSave"
+      >保存</t-button
+    >
+  </view>
+</view>

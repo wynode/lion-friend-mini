@@ -8,6 +8,7 @@
       navigation="{{ { type: 'dots' } }}"
       list="{{swiperList}}"
       bind:click="onTap"
+      height="400rpx"
     >
     </t-swiper>
   </view>
@@ -43,45 +44,19 @@
     ></t-notice-bar>
   </view>
 
-  <view class="home-house-container">
-    <t-row gutter="14">
-      <t-col
-        span="12"
-        wx:for="{{houseList}}"
-        wx:key="index"
-        data-item="{{item}}"
-        bind:tap="handleGoHouseProfile"
-      >
-        <view class="home-house-item">
-          <view>
-            <t-image
-              mode="aspectFill"
-              class="home-house-image"
-              src="{{item.image}}"
-            ></t-image>
-          </view>
-          <view class="home-house-info">
-            <view>
-              <view class="home-house-title"> {{item.title}} </view>
-              <view class="home-house-desc"> {{ item.desc}}</view>
-            </view>
-            <view class="home-house-cost">
-              <view class="home-house-unit"> S$ </view>
-              <view class="home-house-price"> {{item.price}}/月 </view>
-            </view>
-            <view class="home-house-tags">
-              <view
-                class="home-house-tag"
-                wx:for="{{item.tags}}"
-                wx:for-index="tagIndex"
-                wx:for-item="tagItem"
-                wx:key="tagIndex"
-                >{{ tagItem}}</view
-              >
-            </view>
-          </view>
-        </view>
-      </t-col>
-    </t-row>
+  <house-list houseList="{{houseList}}"></house-list>
+
+  <view wx:if="{{houseList.length}}">
+    <view
+      wx:if="{{hasMore}}"
+      style="display: flex; justify-content: center; font-size: 24rpx; color: #999"
+      >正在加载更多...</view
+    >
+    <view
+      wx:else
+      style="display: flex; justify-content: center; font-size: 24rpx; color: #999"
+      >没有更多数据了</view
+    >
   </view>
+  <view style="height: 20rpx"></view>
 </view>

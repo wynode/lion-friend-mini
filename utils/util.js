@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-const formatTime = (date, template) => dayjs(date).format(template);
+const formatTime = (date, template) => dayjs(date).format('YYYY-MM-DD HH:mm:ss');
 
 /**
  * 格式化价格数额为字符串

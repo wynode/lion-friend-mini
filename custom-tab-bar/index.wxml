@@ -11,8 +11,56 @@
   >
     <view class="custom-tab-bar-wrapper">
       <!-- <t-icon prefix="wr" name="{{item.icon}}" size="48rpx" /> -->
-      <image src="{{active === index ? item.selectedIconPath : item.iconPath}}" style="width: 48rpx;height: 48rpx;" />
+      <image
+        src="{{active === index ? item.selectedIconPath : item.iconPath}}"
+        style="width: 48rpx; height: 48rpx"
+      />
       <view class="{{active === index ? 'active-text' : 'text'}}">{{ item.text }}</view>
     </view>
   </t-tab-bar-item>
+  <t-popup
+    visible="{{visible}}"
+    bind:visible-change="onVisibleChange"
+    placement="bottom"
+  >
+    <view class="p-box">
+      <view
+        class="p-item"
+        bind:tap="handleGoPublish"
+      >
+        <view class="p-left">
+          <t-image
+            class="p-image"
+            src="/assets/images/tabbar/particle.svg"
+          ></t-image>
+          <view class="p-center"
+            ><view class="p-title">发布文章</view><view class="p-desc"> 和大家分享你的心得吧~</view></view
+          ></view
+        >
+      </view>
+      <view class="p-item">
+        <view class="p-left">
+          <t-image
+            class="p-image"
+            src="/assets/images/tabbar/phouse.svg"
+          ></t-image>
+          <view class="p-center"
+            ><view class="p-title">发布房源 </view><view class="p-desc"> 让大家了解到您的房源信息</view></view
+          ></view
+        >
+
+        <view class="p-right">敬请期待</view>
+      </view>
+      <view class="p-item">
+        <view class="p-left">
+          <t-image
+            class="p-image"
+            src="/assets/images/tabbar/pservice.svg"
+          ></t-image>
+          <view class="p-center"><view class="p-title">发布服务 </view><view class="p-desc"> 发布服务信息~</view></view>
+        </view>
+        <view class="p-right">敬请期待</view>
+      </view>
+    </view>
+  </t-popup>
 </t-tab-bar>

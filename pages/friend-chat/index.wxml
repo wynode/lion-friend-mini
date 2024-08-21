@@ -1,0 +1,36 @@
+<view class="page-background">
+  <view class="page-container">
+    <view class="group-container">
+      <view
+        class="group-item"
+        wx:for="{{groups}}"
+        wx:key="id"
+      >
+        <image
+          class="qr-code"
+          src="{{item.qrCode}}"
+          mode="aspectFit"
+          bindtap="previewQR"
+          data-id="{{item.id}}"
+        />
+        <text class="group-name">{{item.name}}</text>
+      </view>
+    </view>
+    <t-popup
+      visible="{{visible}}"
+      bind:visible-change="onVisibleChange"
+      placement="center"
+    >
+      <view class="dialog">
+        <image
+          class="qr-code"
+          src="{{cur.qrCode}}"
+          mode="aspectFit"
+          bindtap="previewQR"
+          data-id="{{cur.id}}"
+        />
+        <text class="group-name">{{cur.name}}</text>
+      </view>
+    </t-popup>
+  </view>
+</view>

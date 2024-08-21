@@ -1,0 +1,67 @@
+.setting-container {
+  padding: 50rpx 32rpx;
+
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.t-cell-group {
+  margin-bottom: 20rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  height: calc(100vh - 140rpx);
+  background-color: #fff;
+}
+
+.t-cell-group .t-cell:first-child .t-cell__title-text {
+  font-size: 26rpx;
+  font-weight: 500;
+  line-height: 32rpx;
+  color: #000000;
+  margin-top: 60rpx;
+}
+
+.t-cell-group__title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  padding: 16rpx 16rpx;
+}
+
+.t-cell-group .t-cell {
+  background-color: #ffffff;
+  padding: 22rpx;
+}
+
+.t-cell::after {
+  left: 16rpx;
+  right: 16rpx;
+}
+
+.t-cell__title {
+  font-size: 28rpx;
+  color: #333;
+}
+.t-cell .t-cell__title-text {
+  font-size: 26rpx;
+  font-weight: normal;
+  line-height: 32rpx;
+  color: #969696;
+  margin-left: 10rpx;
+}
+
+/* 自定义开关颜色 */
+.t-switch__body--checked {
+  background-color: #ffc82f !important;
+}
+
+.t-switch .t-switch__body {
+  background-color: #e9e9ea;
+  width: 92rpx;
+  height: 55rpx;
+}
+
+.t-switch__dot {
+  background-color: #ffffff !important;
+}
+

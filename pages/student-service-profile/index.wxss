@@ -1,0 +1,138 @@
+page {
+  box-sizing: border-box;
+}
+
+.page-background {
+  background-color: #f7f8fa;
+  height: 100vh;
+  overflow: auto;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 40rpx);
+}
+
+.page-container {
+  /* padding: 30rpx; */
+  padding-top: 40rpx;
+}
+
+.item {
+  width: 684rpx;
+  border-radius: 18rpx;
+  opacity: 1;
+  background: #ffffff;
+  display: flex;
+  padding: 46rpx 34rpx;
+  box-sizing: border-box;
+  margin: 0 auto;
+  margin-bottom: 46rpx;
+}
+
+.item-details {
+  margin-top: 32rpx;
+}
+
+.item-detail {
+  font-size: 22rpx;
+  font-weight: normal;
+  line-height: 35rpx;
+  letter-spacing: 0em;
+
+  color: #000000;
+}
+
+.item-left {
+  opacity: 1;
+  flex-grow: 1;
+  margin-right: 30rpx;
+}
+
+.item-right {
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.item-title {
+  font-weight: 500;
+  font-size: 28rpx;
+  color: #000000;
+}
+
+.item-desc {
+  font-weight: 400;
+  font-size: 22rpx;
+  color: #979797;
+  margin-top: 10rpx;
+}
+
+.item-btn {
+  border-radius: 8rpx;
+  opacity: 1;
+  width: 125rpx;
+  height: 53rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffc82f;
+  font-size: 24rpx;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0em;
+  color: #000000;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.item-btn:hover {
+  opacity: 0.8;
+}
+
+.dialog-item {
+  display: flex;
+  font-size: 26rpx;
+  font-weight: normal;
+  line-height: 38px;
+
+  margin-left: 10rpx;
+
+  color: #000000;
+}
+
+.dialog-btn {
+  font-size: 26rpx;
+  font-weight: normal;
+
+  color: #ffc82f;
+  margin-left: 42rpx;
+}
+
+.dialog-btn:hover {
+  opacity: 0.9;
+}
+
+.dialog-close {
+  width: 230rpx;
+  height: 60rpx;
+  border-radius: 12rpx;
+  opacity: 1;
+
+  background: #ffc82f;
+  font-size: 26rpx;
+  font-weight: 500;
+  line-height: 38rpx;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  margin: 0 auto;
+  margin-bottom: 40rpx;
+  cursor: pointer;
+}
+
+.dialog-close:hover {
+  opacity: 0.9;
+}
+
+.dialog-close-box {
+  margin: 0 auto;
+}

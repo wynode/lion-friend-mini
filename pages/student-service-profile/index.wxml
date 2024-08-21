@@ -1,0 +1,75 @@
+<view class="page-background">
+  <view class="page-container">
+    <view
+      wx:for="{{services}}"
+      wx:key="title"
+      class="item"
+    >
+      <view class="item-left">
+        <view>
+          <view class="item-title">{{item.title}}</view>
+
+          <view class="item-desc">{{item.description}}</view>
+        </view>
+        <view class="item-details">
+          <view
+            class="item-detail"
+            wx:for="{{item.details}}"
+            wx:key="index"
+            wx:for-item="detailItem"
+          >
+            · {{detailItem}}</view
+          >
+        </view>
+      </view>
+      <view class="item-right">
+        <view
+          class="item-btn"
+          bind:tap="onConnectTap"
+          data-service="{{item}}"
+          >联系</view
+        >
+      </view>
+
+      <t-dialog
+        visible="{{showDialog}}"
+        title="联系服务"
+        bind:confirm="closeDialog"
+      >
+        <view
+          slot="content"
+          style="margin-top: 26rpx"
+        >
+          <view class="dialog-item"
+            >电话：{{dialogItem.phone}}
+            <view
+              bind:tap="onPhoneTap"
+              data-item="{{item}}"
+              class="dialog-btn"
+              >复制</view
+            ></view
+          >
+          <view class="dialog-item"
+            >微信：{{dialogItem.wechat}}
+            <view
+              bind:tap="onWechatTap"
+              data-item="{{item}}"
+              class="dialog-btn"
+              >复制</view
+            ></view
+          >
+        </view>
+        <view
+          slot="confirm-btn"
+          class="dialog-close-box"
+        >
+          <view
+            bind:tap="closeDialog"
+            class="dialog-close"
+            >关闭</view
+          >
+        </view>
+      </t-dialog>
+    </view>
+  </view>
+</view>

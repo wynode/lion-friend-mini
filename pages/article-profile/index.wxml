@@ -1,0 +1,148 @@
+<view class="page-background">
+  <view class="page-container">
+    <view class="top">
+      <view class="top-left">
+        <t-image
+          class="avatar"
+          shape="circle"
+          mode="aspectFill"
+          src="{{articleInfo.avatar}}"
+        ></t-image>
+        <view class="username">{{articleInfo.username}}</view>
+      </view>
+      <view class="top-right">● ● ●</view>
+    </view>
+    <view class="banner">
+      <t-image
+        class="banner-image"
+        mode="aspectFill"
+        src="{{articleInfo.banner}}"
+      ></t-image>
+    </view>
+    <view class="content">
+      <view class="title"> {{articleInfo.title}}</view>
+      <view class="desc">{{articleInfo.desc}}</view>
+      <view class="ip-time"> IP：{{articleInfo.ip}} | 发布于{{articleInfo.update_time}} </view>
+      <t-divider></t-divider>
+      <view class="location-title">位置信息</view>
+      <view class="map">
+        <map
+          id="myMap"
+          class="myMap"
+          style="width: 100%; height: 360rpx"
+          latitude="{{articleInfo.location.latitude}}"
+          longitude="{{articleInfo.location.longitude}}"
+          markers="{{markers}}"
+          bindtap="handleMarketTap"
+          show-location
+        >
+        </map>
+      </view>
+      <view class="c-title">评论</view>
+      <view>
+        <view
+          wx:for="{{articleInfo.comment}}"
+          wx:key="index"
+          class="c-item"
+        >
+          <t-image
+            class="c-avatar"
+            shape="circle"
+            mode="aspectFill"
+            src="{{item.avatar}}"
+          ></t-image>
+
+          <view class="c-right">
+            <view class="c-name"
+              >{{item.name}}
+              <view
+                class="c-tag"
+                wx:if="{{ritem.tag}}"
+                >{{ritem.tag}}</view
+              ></view
+            >
+            <view class="c-content">{{item.content}}</view>
+            <view class="c-ip-time">{{item.ip}} | {{item.update_time}}</view>
+            <t-divider></t-divider>
+            <view
+              wx:if="{{item.reply && item.reply.length}}"
+              class="c-reply"
+            >
+              <view
+                wx:for="{{item.reply}}"
+                wx:for-item="ritem"
+                wx:for-index="index"
+                wx:key="index"
+                class="c-reply-item"
+              >
+                <t-image
+                  class="c-avatar"
+                  shape="circle"
+                  mode="aspectFill"
+                  src="{{ritem.avatar}}"
+                ></t-image>
+
+                <view class="c-right">
+                  <view class="c-name"
+                    >{{ritem.name}}
+                    <view
+                      class="c-tag"
+                      wx:if="{{ritem.tag}}"
+                      >{{ritem.tag}}</view
+                    >
+                  </view>
+                  <view class="c-content">{{ritem.content}}</view>
+                  <view class="c-ip-time">{{ritem.ip}} | {{ritem.update_time}}</view>
+                </view>
+              </view>
+              <t-divider></t-divider>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="nothing">- 没有了 -</view>
+    </view>
+    <view class="bottom">
+      <view class="b-item" style="margin-top: 4rpx;">
+        <t-image
+          style="width: 34rpx; height: 30rpx"
+          src="/assets/images/house/heart-select.png"
+          wx:if="{{articleInfo.is_like}}"
+          data-item="like"
+          bind:tap="handleHouseUserOpreation"
+        />
+        <t-image
+          style="width: 34rpx; height: 30rpx"
+          src="/assets/images/house/heart.png"
+          wx:else
+          data-item="unLike"
+          bind:tap="handleHouseUserOpreation"
+        />
+      </view>
+      <view class="b-item">
+        <t-image
+          style="width: 34rpx; height: 34rpx"
+          src="/assets/images/house/star-select.png"
+          wx:if="{{articleInfo.is_collect}}"
+          data-item="collect"
+          bind:tap="handleHouseUserOpreation"
+        />
+        <t-image
+          style="width: 34rpx; height: 34rpx"
+          src="/assets/images/house/star.png"
+          wx:else
+          data-item="unCollect"
+          bind:tap="handleHouseUserOpreation"
+        />
+      </view>
+      <view class="b-item">
+        <t-image
+          style="width: 30rpx; height: 31rpx"
+          src="/assets/images/house/forward.png"
+          data-item="forward"
+          bind:tap="handleHouseUserOpreation"
+        />
+      </view>
+    </view>
+  </view>
+</view>

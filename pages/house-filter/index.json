@@ -19,6 +19,7 @@
     "t-row": "tdesign-miniprogram/row/row",
     "t-col": "tdesign-miniprogram/col/col",
     "t-slider": "tdesign-miniprogram/slider/slider",
+    "house-list": "/components/house-list/index",
     "t-dropdown-menu": "tdesign-miniprogram/dropdown-menu/dropdown-menu",
     "t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item"
   }

@@ -7,20 +7,20 @@ export default [
   },
   {
     text: '社区',
-    url: 'pages/video-list/index',
+    url: 'pages/friend-community/index',
     iconPath: '/assets/images/tabbar/community.svg',
     selectedIconPath: '/assets/images/tabbar/community-select.svg',
   },
 
   {
     text: '发布',
-    url: 'pages/video-list/index',
+    url: 'pages/publish/index',
     iconPath: '/assets/images/tabbar/publish.svg',
     selectedIconPath: '/assets/images/tabbar/publish-select.svg',
   },
   {
     text: '群聊',
-    url: 'pages/video-list/index',
+    url: 'pages/friend-chat/index',
     iconPath: '/assets/images/tabbar/chat.svg',
     selectedIconPath: '/assets/images/tabbar/chat-select.svg',
   },

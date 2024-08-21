@@ -4,12 +4,21 @@
     "pages/house-profile/index",
     "pages/house-filter/index",
     "pages/house-points/index",
-    "pages/house-hosting/index",
-
     "pages/my-center/index",
+    "pages/integral-profile/index",
+    "pages/edit-profile/index",
+    "pages/edit-profile-edit/index",
+    "pages/setting-profile/index",
+    "pages/article-profile/index",
+    "pages/student-service/index",
+    "pages/student-service-profile/index",
+    "pages/friend-community/index",
+    "pages/friend-chat/index",
+    "pages/publish/index",
+    "pages/publish-article/index",
 
-    "pages/register/index",
     "pages/login/index",
+    "pages/register/index",
     "pages/video-list/index",
     "pages/video-play/index"
   ],
@@ -27,6 +36,18 @@
       {
         "pagePath": "pages/video-list/index",
         "text": "视频课程"
+      },
+      {
+        "pagePath": "pages/friend-community/index",
+        "text": "友友社区"
+      },
+      {
+        "pagePath": "pages/friend-chat/index",
+        "text": "友友群聊"
+      },
+      {
+        "pagePath": "pages/publish/index",
+        "text": "发布"
       },
       {
         "pagePath": "pages/my-center/index",

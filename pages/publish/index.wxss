@@ -1,0 +1,12 @@
+page {
+  box-sizing: border-box;
+  /* padding-bottom: calc(env(safe-area-inset-bottom) + 96rpx); */
+}
+
+.page-background {
+  background-color: #f7f8fa;
+}
+
+.page-container {
+  /* padding: 30rpx; */
+}

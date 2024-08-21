@@ -1,0 +1,33 @@
+page {
+  box-sizing: border-box;
+  /* padding-bottom: calc(env(safe-area-inset-bottom) + 96rpx); */
+}
+
+.page-background {
+  background-color: #f7f8fa;
+}
+
+.page-container {
+  /* padding: 30rpx; */
+}
+
+.edit-container {
+  padding: 20rpx;
+}
+
+.input-counter {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.footer {
+  position: fixed;
+  bottom: 40rpx;
+  left: 20rpx;
+  right: 20rpx;
+}
+
+.footer .t-button {
+  margin-top: 120rpx;
+  margin-left: 200rpx;
+}

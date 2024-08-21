@@ -1,0 +1,47 @@
+<view class="article-container article-class">
+  <t-row gutter="14">
+    <t-col
+      span="12"
+      wx:for="{{filteredArticleList}}"
+      wx:key="index"
+      data-item="{{item}}"
+      bind:tap="handleGoHouseProfile"
+    >
+      <view class="article-item">
+        <t-image
+          mode="aspectFill"
+          class="article-image"
+          src="{{item.images ? item.images[0] : ''}}"
+        ></t-image>
+        <view class="article-content">
+          <view class="article-title"> {{item.title}} </view>
+          <view class="article-info">
+            <view style="display: flex; align-items: center">
+              <image
+                class="author-avatar"
+                src="{{item.avatar_url}}"
+                mode="aspectFill"
+              ></image>
+
+              <text class="author-name">{{item.deployer_cn}}</text>
+            </view>
+
+            <view class="like-container">
+              <image
+                wx:if="{{item.is_liked}}"
+                class="like-icon"
+                src="/assets/images/house/heart-select.png"
+              ></image>
+              <image
+                wx:else
+                class="like-icon"
+                src="/assets/images/house/heart.png"
+              ></image>
+              <text class="like-count">{{item.like_count}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </t-col>
+  </t-row>
+</view>

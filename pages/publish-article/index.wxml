@@ -1,0 +1,60 @@
+<view class="page-background">
+  <view class="page-container">
+    <view class="container">
+      <!-- <view style="display: flex">
+        <t-icon
+          name="chevron-left"
+          size="20"
+          style="color: #767676"
+        ></t-icon>
+      </view> -->
+
+      <view class="wrapper">
+        <t-upload
+          draggable
+          media-type="{{['video','image']}}"
+          files="{{fileList}}"
+          gridConfig="{{gridConfig}}"
+          bind:add="handleAdd"
+          bind:remove="handleRemove"
+        />
+      </view>
+      <view class="textarea">
+        <t-textarea
+          placeholder="填写标题会有更多赞哦~"
+          value="{{title}}"
+          maxlength="24"
+          autosize
+          indicator
+          borderless="{{true}}"
+          bind:change="onTitleChange"
+          placeholderStyle="color: #979797;font-size: 26rpx;font-weight: normal"
+        />
+      </view>
+
+      <view class="textarea">
+        <t-textarea
+          placeholder="填写征文，最多100个字个性签名介绍，最多100个字个性签名介绍，最多100个字个性签名介绍，最多100个字个性签名介绍最多100个字个性签名介绍。"
+          value="{{content}}"
+          bind:change="onContentChange"
+          placeholderStyle="color: #979797;font-size: 26rpx;font-weight: normal"
+        />
+      </view>
+      <t-cell
+        title="位置"
+        note="{{location}}"
+        arrow
+        hover
+        bordered="{{false}}"
+        bind:tap="onSelectLocation"
+        class="textarea"
+      />
+
+      <view
+        class="publish-btn"
+        bind:tap="handlePublish"
+        >立即发布</view
+      >
+    </view>
+  </view>
+</view>

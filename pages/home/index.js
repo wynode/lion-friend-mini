@@ -1,11 +1,11 @@
 const app = getApp();
 
 const swiperList = [
-  'https://cdn.luminouscn.com/banner1.jpg',
-  'https://cdn.luminouscn.com/banner2.jpg',
-  'https://cdn.luminouscn.com/banner3.jpg',
-  'https://cdn.luminouscn.com/banner4.jpg',
-  'https://cdn.luminouscn.com/banner5.jpg',
+  'https://cdn.luminouscn.com/banner-01.png',
+  'https://cdn.luminouscn.com/banner-02.png',
+  'https://cdn.luminouscn.com/banner-03.png',
+  'https://cdn.luminouscn.com/banner-04.png',
+  'https://cdn.luminouscn.com/banner-05.png',
   // '/assets/images/banner/banner1.jpg',
   // '/assets/images/banner/banner2.jpg',
   // '/assets/images/banner/banner3.jpg',
@@ -40,41 +40,6 @@ const serviceList = [
   },
 ];
 
-const houseList = [
-  {
-    id: 1,
-    image: 'https://cdn.luminouscn.com/house.png',
-    title: '合租精装公寓单人间',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '1500',
-    tags: ['38.52㎡', '合租', '公寓', '普通房'],
-  },
-  {
-    id: 2,
-    image: 'https://cdn.luminouscn.com/house1.png',
-    title: '整租精装公寓',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '3500',
-    tags: ['112.52㎡', '整租', '公寓', '普通房'],
-  },
-  {
-    id: 3,
-    image: 'https://cdn.luminouscn.com/house.png',
-    title: '合租精装公寓单人间',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '1500',
-    tags: ['38.52㎡', '合租', '公寓', '普通房'],
-  },
-  {
-    id: 4,
-    image: 'https://cdn.luminouscn.com/house1.png',
-    title: '豪华联排别墅',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '25000',
-    tags: ['338.52㎡', '整租', '别墅', '普通房'],
-  },
-];
-
 Page({
   data: {
     current: 0,
@@ -84,7 +49,10 @@ Page({
 
     swiperList,
     serviceList,
-    houseList,
+    houseList: [],
+    pageNum: 1,
+    pageSize: 10,
+    hasMore: true,
 
     content: ['用户东成西就成功预定房源！', '用户南帝北丐成功预定房源！', '用户独孤求败成功预定房源！'],
   },
@@ -94,37 +62,59 @@ Page({
   },
 
   onLoad() {
-    // app.request('/official_website/1/', 'GET').then((res) => {
-    //   this.setData({ extraInfo: res.extra_info });
-    //   const homeImages = res.extra_info.home[0].images;
-    //   if (homeImages.length) {
-    //     this.setData({
-    //       homeImages,
-    //     });
-    //   }
-    // });
+    this.loadHouseList();
+
+    app.request('/index_notify/', 'GET').then((res) => {
+      this.setData({ content: res });
+    });
+  },
+
+  // 上拉触底事件
+  onReachBottom() {
+    console.log(this.data.hasMore, '---');
+    if (this.data.hasMore) {
+      this.loadHouseList();
+    }
+  },
+
+  // 加载房源列表
+  async loadHouseList() {
+    if (!this.data.hasMore) return;
+
+    // 这里替换为你的实际 API 调用
+    const res = await app.request('/curated_shared_rental/', 'GET', {
+      page: this.data.pageNum,
+      page_size: this.data.pageSize,
+      // ... 其他可能的参数
+    });
+    const newHouseList = res.results; // 假设 API 返回的数据结构
+
+    this.setData({
+      houseList: [...this.data.houseList, ...newHouseList],
+      pageNum: this.data.pageNum + 1,
+      hasMore: newHouseList.length === this.data.pageSize,
+    });
   },
 
   handleGoMenu(e) {
     const { item } = e.currentTarget.dataset;
     if (item.name === '优选合租') {
       wx.navigateTo({
-        url: `/pages/house-filter/index?id=${item.id}`,
-      }); 
+        url: `/pages/house-filter/index?type=shared_rental`,
+      });
     } else if (item.name === '低龄寄宿') {
       wx.navigateTo({
-        url: `/pages/house-filter/index?id=${item.id}`,
-      }); 
+        url: `/pages/house-filter/index?type=host_family`,
+      });
     } else if (item.name === '学生服务') {
       wx.navigateTo({
-        url: `/pages/house-filter/index?id=${item.id}`,
-      }); 
+        url: `/pages/student-service/index?id=${item.id}`,
+      });
     } else if (item.name === '积分介绍') {
       wx.navigateTo({
         url: `/pages/house-points/index?id=${item.id}`,
-      }); 
-    } 
-
+      });
+    }
   },
 
   handleGoHouseProfile(e) {

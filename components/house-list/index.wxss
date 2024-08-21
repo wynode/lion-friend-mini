@@ -1,0 +1,93 @@
+.home-house-container {
+  width: 685rpx;
+  margin: 0 auto;
+}
+
+.home-house-item {
+  width: 325rpx;
+  border-radius: 18rpx;
+  overflow: hidden;
+  opacity: 1;
+  margin-bottom: 30rpx;
+
+  background: #ffffff;
+}
+
+.home-house-image {
+  width: 100%;
+  height: 296rpx;
+  position: relative;
+}
+
+.home-house-info {
+  padding: 18rpx;
+}
+
+.home-house-title {
+  font-weight: 600;
+  font-size: 24rpx;
+  color: #000000;
+}
+
+.home-house-jx {
+  position: absolute;
+  left: 24rpx;
+  top: 20rpx;
+  width: 85.96rpx;
+  height: 36.85rpx;
+  opacity: 1;
+}
+
+.home-house-ycz {
+  position: absolute;
+  right: 8rpx;
+  bottom: 14rpx;
+  width: 105rpx;
+  height: 37rpx;
+  opacity: 1;
+}
+
+.home-house-desc {
+  font-weight: 400;
+  font-size: 18rpx;
+  color: #979797;
+  margin-top: 6rpx;
+}
+
+.home-house-cost {
+  margin: 12rpx 0 18rpx 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.home-house-unit {
+  font-size: 18rpx;
+  font-weight: 500;
+  color: #ffc82f;
+  margin-bottom: 4rpx;
+  margin-right: 6rpx;
+}
+
+.home-house-price {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #ffc82f;
+}
+
+.home-house-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.home-house-tag {
+  flex-shrink: 0;
+  border-radius: 24rpx;
+  padding: 6rpx 16rpx;
+  margin-right: 8rpx;
+  margin-top: 6rpx;
+  margin-left: 2rpx;
+  border: 1rpx solid #d8d8d8;
+  font-size: 16rpx;
+  font-weight: normal;
+  color: #979797;
+}

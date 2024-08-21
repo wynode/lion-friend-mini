@@ -32,148 +32,79 @@ const priceFilter = {
 const houseTypeFilter = {
   value: 'he',
   options: [
-    {
-      label: '整租',
-      value: 'all',
-    },
-    {
-      label: '合租',
-      value: 'he',
-    },
+    { value: 1, label: '整租' },
+    { value: 2, label: '合租' },
   ],
 };
-const roomTypeFilter = {
+const propertyTypeFilter = {
   value: 'no',
   options: [
-    {
-      label: '主人房',
-      value: 'no',
-    },
-    {
-      label: '普通房',
-      value: '6',
-    },
-    {
-      label: '床位',
-      value: '3',
-    },
+    { value: 1, label: '组屋' },
+    { value: 2, label: '共管公寓' },
+    { value: 3, label: '私人公寓' },
+    { value: 4, label: '排屋' },
   ],
 };
 const roomFacilityFilter = {
   value: '1',
   options: [
-    {
-      label: '阳台',
-      value: 'no',
-    },
-    {
-      label: '独立卫生间',
-      value: '1',
-    },
-    {
-      label: '空调',
-      value: '4',
-    },
+    { value: '独立卫浴', label: '独立卫浴' },
+    { value: '公共卫浴', label: '公共卫浴' },
+    { value: '热水器', label: '热水器' },
+    { value: '空调', label: '空调' },
+    { value: '风扇', label: '风扇' },
+    { value: 'WIFI', label: 'WIFI' },
+    { value: '微波炉', label: '微波炉' },
+    { value: '电磁炉', label: '电磁炉' },
+    { value: '烤箱', label: '烤箱' },
+    { value: '冰箱', label: '冰箱' },
+    { value: '洗衣机', label: '洗衣机' },
+    { value: '烘干机', label: '烘干机' },
+    { value: '橱柜', label: '橱柜' },
+    { value: '床', label: '床' },
+    { value: '衣橱', label: '衣橱' },
+    { value: '椅子', label: '椅子' },
+    { value: '桌子', label: '桌子' },
   ],
 };
 const sorterFilter = {
   value: 'default',
   options: [
     {
-      value: 'default',
+      value: '-deploy_time',
       label: '默认排序',
     },
     {
-      value: 'price',
+      value: '-price',
       label: '价格从高到低',
     },
     {
-      value: 'price1',
+      value: 'price',
       label: '价格从低到高',
     },
   ],
 };
 const positionFilter = {
-  value: 'default',
+  value: 0,
   options: [
-    {
-      value: 'default',
-      label: '东方',
-    },
-    {
-      value: 'x',
-      label: '西方',
-    },
-    {
-      value: 'price',
-      label: '北方',
-    },
-    {
-      value: 'price1',
-      label: '南方',
-    },
+    { value: 0, label: '不限' },
+    { value: 1, label: '东部' },
+    { value: 2, label: '西部' },
+    { value: 3, label: '南部' },
+    { value: 4, label: '北部' },
+    { value: 5, label: '中部' },
   ],
 };
 
+const houseList = [];
 
-const houseList = [
-  {
-    id: 1,
-    image: 'https://cdn.luminouscn.com/house.png',
-    title: '合租精装公寓单人间',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '1500',
-    tags: ['38.52㎡', '合租', '公寓', '普通房'],
-  },
-  {
-    id: 2,
-    image: 'https://cdn.luminouscn.com/house1.png',
-    title: '合租精装公寓单人间',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '1500',
-    tags: ['38.52㎡', '合租', '公寓', '普通房'],
-  },
-  {
-    id: 3,
-    image: 'https://cdn.luminouscn.com/house1.png',
-    title: '合租精装公寓单人间',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '1500',
-    tags: ['38.52㎡', '合租', '公寓', '普通房'],
-  },
-  {
-    id: 4,
-    image: 'https://cdn.luminouscn.com/house.png',
-    title: '合租精装公寓单人间',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '1500',
-    tags: ['38.52㎡', '合租', '公寓', '普通房'],
-  },
-  {
-    id: 5,
-    image: 'https://cdn.luminouscn.com/house1.png',
-    title: '合租精装公寓单人间',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '1500',
-    tags: ['38.52㎡', '合租', '公寓', '普通房'],
-  },
-  {
-    id: 6,
-    image: 'https://cdn.luminouscn.com/house.png',
-    title: '合租精装公寓单人间',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '1500',
-    tags: ['38.52㎡', '合租', '公寓', '普通房'],
-  },
-  {
-    id: 7,
-    image: 'https://cdn.luminouscn.com/house.png',
-    title: '合租精装公寓单人间',
-    desc: '公寓位于cityhall地铁站附近的fu',
-    price: '1500',
-    tags: ['38.52㎡', '合租', '公寓', '普通房'],
-  },
-];
+// 辅助函数：将对象转换为查询字符串
+function objectToQueryString(obj) {
+  return Object.keys(obj)
+    .filter((key) => obj[key] !== undefined && obj[key] !== null && obj[key] !== '')
+    .map((key) => `${key}=${obj[key]}`)
+    .join('&');
+}
 
 Page({
   data: {
@@ -181,15 +112,25 @@ Page({
     priceFilter,
     sorterFilter,
     houseTypeFilter,
-    roomTypeFilter,
+    propertyTypeFilter,
     roomFacilityFilter,
     positionFilter,
     filter: {
-      sorter: 'default',
+      title: '',
+      sorter: '-deploy_time',
       price: 'no',
-      ganPrice: [3000, 5000],
+      ganPrice: [0, 5000],
+      region: [],
+      rental_type: [],
+      property_type: [],
+      room_facility: [],
     },
+    sliderValue: [0, 100],
+    maxPrice: 5000,
     houseList,
+    pageNum: 1,
+    pageSize: 10,
+    hasMore: true,
   },
 
   onPageScroll: function (e) {
@@ -200,20 +141,76 @@ Page({
     }
   },
 
-  onShow(options) {
-    console.log(options);
+  // 上拉触底事件
+  onReachBottom() {
+    if (this.data.hasMore) {
+      this.fetchHouseList(true);
+    }
   },
 
   onLoad(options) {
-    console.log(options);
-    // const { id } = options || {};
+    const { type } = options;
+    this.setData(
+      {
+        houseType: type,
+      },
+      () => {
+        this.fetchHouseList();
+      },
+    );
   },
 
-  async handleInitPage() {
-    app.request(`/course/`).then((res) => {
-      this.setData({
-        res,
-      });
+  async fetchHouseList(isReach) {
+    const { filter, houseType } = this.data;
+
+    // 构建查询参数
+    const params = {
+      order_by: filter.sorter,
+      // 添加其他需要的筛选条件
+    };
+    if (filter.price !== 'no') {
+      if (filter.ganPrice[0] === 5000) {
+        params.price = `${filter.ganPrice[0]},${100000}`;
+      } else {
+        params.price = `${filter.ganPrice[0]},${filter.ganPrice[1]}`;
+      }
+    }
+    if (filter.region.length) {
+      params.region = filter.region.join(',');
+    }
+    if (filter.rental_type.length) {
+      params.rental_type = filter.rental_type.join(',');
+    }
+    if (filter.property_type.length) {
+      params.property_type = filter.property_type.join(',');
+    }
+    if (filter.room_facility.length) {
+      params.room_facility = filter.room_facility.join(',');
+    }
+    if (filter.title) {
+      params.title = filter.title;
+    }
+
+    const queryString = objectToQueryString(params);
+    const url = `/${houseType}/${queryString ? '?' + queryString : ''}`;
+
+    const res = await app.request(url, 'GET', {
+      page: this.data.pageNum,
+      page_size: this.data.pageSize,
+    });
+    const newHouseList = res.results;
+
+    this.setData({
+      houseList: isReach ? [...this.data.houseList, ...newHouseList] : newHouseList,
+      pageNum: this.data.pageNum + 1,
+      hasMore: newHouseList.length === this.data.pageSize,
+    });
+  },
+
+  handleGoHouseProfile(e) {
+    const { item } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/pages/house-profile/index?id=${item.id}`,
     });
   },
 
@@ -221,21 +218,178 @@ Page({
 
   handleFilterSorterTap(e) {
     const { value } = e.detail;
-    this.setData({
-      filter: {
-        ...this.data.filter,
-        sorter: value,
+    this.setData(
+      {
+        filter: {
+          ...this.data.filter,
+          sorter: value,
+        },
       },
-    });
+      () => {
+        this.fetchHouseList(); // 在 setData 的回调中调用
+      },
+    );
   },
 
   handleFilterPriceTap(e) {
     const { item } = e.currentTarget.dataset;
     this.setData({
-      filter: {
-        ...this.data.filter,
-        price: item.value,
-      },
+      'filter.price': item.value,
+      'filter.ganPrice': this.getPriceRange(item.value),
+      sliderValue: this.getSliderValue(this.getPriceRange(item.value)),
     });
+  },
+
+  handleFilterRentalTypeTap(e) {
+    const { item } = e.currentTarget.dataset;
+    const currentRentalTypes = this.data.filter.rental_type || [];
+    let newRentalTypes;
+
+    if (currentRentalTypes.includes(item.value)) {
+      // 如果已经选中，则移除
+      newRentalTypes = currentRentalTypes.filter((type) => type !== item.value);
+    } else {
+      // 如果未选中，则添加
+      newRentalTypes = [...currentRentalTypes, item.value];
+    }
+
+    this.setData({
+      'filter.rental_type': newRentalTypes,
+    });
+  },
+
+  handleFilterPropertyTypeTap(e) {
+    const { item } = e.currentTarget.dataset;
+    const currentPropertyTypes = this.data.filter.property_type || [];
+    let newPropertyTypes;
+
+    if (currentPropertyTypes.includes(item.value)) {
+      // 如果已经选中，则移除
+      newPropertyTypes = currentPropertyTypes.filter((type) => type !== item.value);
+    } else {
+      // 如果未选中，则添加
+      newPropertyTypes = [...currentPropertyTypes, item.value];
+    }
+
+    this.setData({
+      'filter.property_type': newPropertyTypes,
+    });
+  },
+
+  handleFilterRoomFacilityTap(e) {
+    const { item } = e.currentTarget.dataset;
+    const currentRoomFacilities = this.data.filter.room_facility || [];
+    let newRoomFacilities;
+
+    if (currentRoomFacilities.includes(item.value)) {
+      // 如果已经选中，则移除
+      newRoomFacilities = currentRoomFacilities.filter((facility) => facility !== item.value);
+    } else {
+      // 如果未选中，则添加
+      newRoomFacilities = [...currentRoomFacilities, item.value];
+    }
+
+    this.setData({
+      'filter.room_facility': newRoomFacilities,
+    });
+  },
+
+  handleFilterRegionTap(e) {
+    const { item } = e.currentTarget.dataset;
+    const currentRegion = this.data.filter.region || [];
+    let newRegion;
+
+    if (currentRegion.includes(item.value)) {
+      // 如果已经选中，则移除
+      newRegion = currentRegion.filter((facility) => facility !== item.value);
+    } else {
+      // 如果未选中，则添加
+      newRegion = [...currentRegion, item.value];
+    }
+
+    this.setData({
+      'filter.region': newRegion,
+    });
+  },
+
+  handleInputChange(e) {
+    const { value } = e.detail;
+    this.setData({
+      'filter.title': value,
+    });
+  },
+
+  handleSliderChange(e) {
+    const [min, max] = e.detail.value;
+    const minPrice = Math.floor((min / 100) * this.data.maxPrice);
+    const maxPrice = Math.ceil((max / 100) * this.data.maxPrice);
+    this.setData({
+      'filter.ganPrice': [minPrice, maxPrice],
+      'filter.price': 'custom',
+      sliderValue: [min, max],
+    });
+  },
+
+  getPriceRange(value) {
+    switch (value) {
+      case '1':
+        return [0, 1000];
+      case '2':
+        return [1000, 2000];
+      case '3':
+        return [2000, 3000];
+      case '4':
+        return [3000, 5000];
+      case '5':
+        return [5000, this.data.maxPrice];
+      default:
+        return [0, this.data.maxPrice];
+    }
+  },
+
+  getSliderValue(range) {
+    const [min, max] = range;
+    return [Math.round((min / this.data.maxPrice) * 100), Math.round((max / this.data.maxPrice) * 100)];
+  },
+
+  handlePriceFilterCancel() {
+    // 重置价格筛选
+    this.setData({
+      'filter.price': 'no',
+      'filter.ganPrice': [0, this.data.maxPrice],
+      sliderValue: [0, 100],
+    });
+  },
+  closeDropdownMenu(index) {
+    const dropdownMenu = this.selectComponent('#dropdownMenu');
+    if (dropdownMenu) {
+      dropdownMenu.toggle(index);
+    }
+  },
+  closeDropdownMenu2() {
+    const dropdownMenu = this.selectComponent('#dropdownMenu');
+    if (dropdownMenu) {
+      dropdownMenu.toggle(2);
+    }
+  },
+  closeDropdownMenu3() {
+    const dropdownMenu = this.selectComponent('#dropdownMenu');
+    if (dropdownMenu) {
+      dropdownMenu.toggle(3);
+    }
+  },
+
+  handleFilter2() {
+    this.closeDropdownMenu(2);
+    this.fetchHouseList(); // 调用获取房源列表的方法
+  },
+  handleFilter3() {
+    this.closeDropdownMenu(3);
+    this.fetchHouseList(); // 调用获取房源列表的方法
+  },
+
+  handlePriceFilterConfirm() {
+    this.closeDropdownMenu(1);
+    this.fetchHouseList(); // 调用获取房源列表的方法
   },
 });

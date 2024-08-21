@@ -3,11 +3,11 @@
     <view class="hp-header">
       <t-image
         class="hp-header-img"
-        src="{{userInfo.avatar}}"
+        src="{{userInfo.avatar_url}}"
         shape="circle"
       />
       <view class="hp-header-info">
-        <view class="hp-header-name"> {{ userInfo.name }} </view>
+        <view class="hp-header-name"> {{ userInfo.name || '管理员' }} </view>
         <view class="hp-header-tags">
           <view
             class="hp-header-tag"
@@ -27,7 +27,7 @@
         duration="{{duration}}"
         interval="{{interval}}"
         navigation="{{ { type: 'dots' } }}"
-        list="{{swiperList}}"
+        list="{{houseInfo.images}}"
         height="320"
         bind:click="onTap"
       >
@@ -47,8 +47,7 @@
               wx:if="{{ item.label === '月租'}}"
               >S$</view
             >
-            <view>{{ item.value }}</view>
-            <view wx:if="{{ item.label === '面积'}}">㎡</view>
+            <view style="white-space: nowrap">{{ item.value }}</view>
           </view>
 
           <view class="hid-item-label"> {{ item.label}} </view>
@@ -59,7 +58,10 @@
 
       <view class="hi-content">
         <view class="hi-title"> {{ houseInfo.title}} </view>
-        <view class="hi-desc"> {{ houseInfo.desc}}</view>
+        <view class="hi-desc"> {{ houseInfo.description}}</view>
+        <view class="hi-desc"> {{ houseInfo.transport_info}}</view>
+        <view class="hi-desc"> {{ houseInfo.teacher_information}}</view>
+        <view class="hi-desc"> {{ houseInfo.service_information}}</view>
       </view>
 
       <view class="hi-facility">
@@ -83,11 +85,12 @@
       <view class="hi-location">
         <view class="hil-title">位置信息</view>
         <view class="hil-map">
+          {{houseInfo.markers.latitude}} {{houseInfo.markers.longitude}}
           <map
             id="myMap"
             style="width: 100%; height: 360rpx"
-            latitude="{{latitude}}"
-            longitude="{{longitude}}"
+            latitude="{{houseInfo.location.lat || latitude}}"
+            longitude="{{houseInfo.location.lng || longitude}}"
             markers="{{markers}}"
             bindtap="handleMarketTap"
             show-location
@@ -107,7 +110,7 @@
         />
         <view class="hu-header-info">
           <view class="hu-header-name-box">
-            <view class="hu-header-name">{{ userInfo.name }}</view>
+            <view class="hu-header-name">{{ userInfo.name || '管理员' }}</view>
             <view class="hu-header-name-tag"> 官方 </view>
           </view>
           <view class="hu-header-tags-box">
@@ -132,24 +135,18 @@
   </view>
 
   <view class="house-bottom">
-    <view class="hb-input">
-      <t-input
-        placeholder="说点什么"
-        borderless="{{true}}"
-      />
-    </view>
-
+    <view class="hb-input"></view>
     <view class="hb-center">
       <view class="hbc-item">
         <t-image
-          style="width: 34rpx; height: 30rpx"
+          style="width: 45rpx; height: 39rpx"
           src="/assets/images/house/heart-select.png"
           wx:if="{{houseInfo.is_like}}"
           data-item="like"
           bind:tap="handleHouseUserOpreation"
         />
         <t-image
-          style="width: 34rpx; height: 30rpx"
+          style="width: 45rpx; height: 39rpx"
           src="/assets/images/house/heart.png"
           wx:else
           data-item="unLike"
@@ -158,14 +155,14 @@
       </view>
       <view class="hbc-item">
         <t-image
-          style="width: 34rpx; height: 34rpx"
+          style="width: 45rpx; height: 45rpx"
           src="/assets/images/house/star-select.png"
           wx:if="{{houseInfo.is_collect}}"
           data-item="collect"
           bind:tap="handleHouseUserOpreation"
         />
         <t-image
-          style="width: 34rpx; height: 34rpx"
+          style="width: 45rpx; height: 45rpx"
           src="/assets/images/house/star.png"
           wx:else
           data-item="unCollect"
@@ -174,7 +171,7 @@
       </view>
       <view class="hbc-item">
         <t-image
-          style="width: 30rpx; height: 31rpx"
+          style="width: 42rpx; height: 42rpx"
           src="/assets/images/house/forward.png"
           data-item="forward"
           bind:tap="handleHouseUserOpreation"
@@ -182,7 +179,76 @@
       </view>
     </view>
     <view class="hb-right">
-      <t-button>预定</t-button>
+      <t-button
+        bind:tap="showPopup"
+        disabled="{{houseInfo.status !== 2}}"
+        >{{houseInfo.status === 2 ? '预定' : houseInfo.status_cn}}</t-button
+      >
     </view>
   </view>
+
+  <t-popup
+    visible="{{visible}}"
+    bind:visible-change="onVisibleChange"
+    placement="center"
+  >
+    <view class="custom-popup">
+      <view class="popup-header">
+        <text class="popup-title">预定房源</text>
+      </view>
+      <view class="popup-content">
+        <t-input
+          borderless="{{true}}"
+          label="姓名"
+          bind:change="onNameChange"
+        />
+        <view class="gender-selector">
+          <text class="label">性别</text>
+          <t-radio-group
+            bind:change="onGenderChange"
+            defaultValue="male"
+          >
+            <t-radio
+              value="1"
+              label="男"
+            />
+            <t-radio
+              value="2"
+              label="女"
+            />
+          </t-radio-group>
+        </view>
+        <t-input
+          label="年龄"
+          type="number"
+          bind:change="onAgeChange"
+        />
+        <t-input
+          label="电话"
+          type="number"
+          bind:change="onPhoneChange"
+        />
+      </view>
+      <view class="popup-footer">
+        <view
+          class="btn-left"
+          bind:tap="closePopup"
+          >取消</view
+        >
+        <view
+          class="btn-right"
+          bind:tap="submitForm"
+          >提交</view
+        >
+      </view>
+    </view>
+  </t-popup>
+  <t-popup
+    visible="{{visible2}}"
+    usingCustomNavbar
+    bind:visible-change="onVisible2Change"
+    placement="bottom"
+  >
+    <view><t-image style="width: 750rpx; height: 455rpx" src="/assets/images/house/share.jpg"></t-image></view>
+  </t-popup>
 </view>

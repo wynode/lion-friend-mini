@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "课程详情",
+  "navigationBarTitleText": "我的",
   "onReachBottomDistance": 10,
   "backgroundTextStyle": "light",
   "enablePullDownRefresh": false,
@@ -21,6 +21,8 @@
     "t-input": "tdesign-miniprogram/input/input",
     "t-dropdown-menu": "tdesign-miniprogram/dropdown-menu/dropdown-menu",
     "t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item",
+    "house-list": "/components/house-list/index",
+    "article-list": "/components/article-list/index",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel"
   }

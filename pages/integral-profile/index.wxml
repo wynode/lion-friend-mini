@@ -1,0 +1,61 @@
+<view class="page-background">
+  <view class="page-container">
+    <t-tabs
+      defaultValue="{{0}}"
+      bind:change="onTabsChange"
+      t-class="custom-tabs"
+      t-class-content="custom-panel"
+      t-class-active="custom-tabs-acitve"
+    >
+      <t-tab-panel
+        label="获取明细"
+        value="0"
+      >
+        <view class="table-container">
+          <view class="table-header">
+            <view class="table-th">时间</view>
+            <view class="table-th">来源</view>
+            <view class="table-th">数量</view>
+          </view>
+          <view
+            wx:for="{{tableData}}"
+            wx:key="index"
+          >
+            <view class="table-row">
+              <view class="table-cell">{{item.time}}</view>
+              <view class="table-cell">{{item.source}}</view>
+              <view class="table-cell">{{item.amount}}</view>
+            </view>
+          </view>
+
+          <view class="no-other">- 没有了 -</view></view
+        >
+      </t-tab-panel>
+      <t-tab-panel
+        label="核销明细"
+        value="1"
+        ><view>
+          <view class="table-container">
+            <view class="table-header">
+              <view class="table-th">时间</view>
+              <view class="table-th">来源</view>
+              <view class="table-th">数量</view>
+            </view>
+            <view
+              wx:for="{{tableData2}}"
+              wx:key="index"
+            >
+              <view class="table-row">
+                <view class="table-cell">{{item.time}}</view>
+                <view class="table-cell">{{item.source}}</view>
+                <view class="table-cell {{item.amount < 0 ? 'negative' : ''}}">{{item.amount}}</view>
+              </view>
+            </view>
+          </view>
+
+          <view class="no-other">- 没有了 -</view></view
+        ></t-tab-panel
+      >
+    </t-tabs>
+  </view>
+</view>

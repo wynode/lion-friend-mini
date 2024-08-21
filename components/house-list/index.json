@@ -1,0 +1,20 @@
+{
+    "component": true,
+    "usingComponents": {
+        "t-search": "tdesign-miniprogram/search/search",
+        "t-swiper": "tdesign-miniprogram/swiper/swiper",
+        "t-swiper-nav": "tdesign-miniprogram/swiper-nav/swiper-nav",
+        "t-image": "tdesign-miniprogram/image/image",
+        "t-icon": "tdesign-miniprogram/icon/icon",
+        "t-toast": "tdesign-miniprogram/toast/toast",
+        "t-tabs": "tdesign-miniprogram/tabs/tabs",
+        "t-col": "tdesign-miniprogram/col/col",
+        "t-row": "tdesign-miniprogram/row/row",
+        "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+        "t-button": "tdesign-miniprogram/button/button",
+        "t-grid": "tdesign-miniprogram/grid/grid",
+        "t-grid-item": "tdesign-miniprogram/grid-item/grid-item",
+        "t-loading": "tdesign-miniprogram/loading/loading",
+        "t-divider": "tdesign-miniprogram/divider/divider"
+    }
+}

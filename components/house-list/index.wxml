@@ -1,0 +1,43 @@
+<view class="home-house-container house-class">
+    <t-row gutter="14">
+      <t-col
+        span="12"
+        wx:for="{{filteredHouseList}}"
+        wx:key="index"
+        data-item="{{item}}"
+        bind:tap="handleGoHouseProfile"
+      >
+        <view class="home-house-item house-item-class">
+          <view style="position: relative;">
+            <t-image
+              mode="aspectFill"
+              class="home-house-image"
+              src="{{item.image}}"
+            ></t-image>
+            <t-image wx:if="{{item.is_curated}}" class="home-house-jx" src="/assets/images/house/jx.svg"></t-image>
+            <t-image wx:if="{{item.status === 1}}" class="home-house-ycz" src="/assets/images/house/ycz.svg"></t-image>
+          </view>
+          <view class="home-house-info">
+            <view>
+              <view class="home-house-title"> {{item.title}} </view>
+              <view class="home-house-desc"> {{ item.desc}}</view>
+            </view>
+            <view class="home-house-cost">
+              <view class="home-house-unit"> S$ </view>
+              <view class="home-house-price"> {{item.price}}/月 </view>
+            </view>
+            <view class="home-house-tags">
+              <view
+                class="home-house-tag"
+                wx:for="{{item.tags}}"
+                wx:for-index="tagIndex"
+                wx:for-item="tagItem"
+                wx:key="tagIndex"
+                >{{ tagItem}}</view
+              >
+            </view>
+          </view>
+        </view>
+      </t-col>
+    </t-row>
+  </view>

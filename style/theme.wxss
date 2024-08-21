@@ -52,3 +52,7 @@
   --td-dropdown-menu-icon-sizem: 30rpx;
   --td-dropdown-menu-active-colorm: #ffc82f;
 }
+
+.t-popup {
+  background-color: #f7f8fa !important;
+}

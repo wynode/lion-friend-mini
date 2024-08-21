@@ -1,7 +1,15 @@
+<wxs module="utils">
+  module.exports = { includes: function(array, value) { if (array && array.indexOf) { return array.indexOf(value) !== -1
+  } return false } }
+</wxs>
+
 <view class="page-background">
-  <view class="page-container">
+  <view style="position: relative; background-color: #fff; z-index: 10000;">
     <view class="page-filter">
-      <t-dropdown-menu arrow-icon="chevron-up">
+      <t-dropdown-menu
+        arrow-icon="chevron-up"
+        id="dropdownMenu"
+      >
         <t-dropdown-item
           label="排序"
           class="filter-sort"
@@ -22,19 +30,28 @@
                 {{item.label}}
               </view>
             </view>
-            <view class="filter-price-detail"> {{ filter.ganPrice[0] }}-{{ filter.ganPrice[1]}}元 </view>
+            <view class="filter-price-detail">{{ filter.ganPrice[0] }}-{{ filter.ganPrice[1] }}元</view>
 
             <t-slider
               range
-              defaultValue="{{[35, 65]}}"
+              value="{{sliderValue}}"
+              bind:change="handleSliderChange"
             />
             <view class="filter-price-num">
-              <view> 0 </view>
-              <view> 5000以上 </view>
+              <view>0</view>
+              <view>{{maxPrice}}以上</view>
             </view>
             <view class="filter-btns">
-              <view class="filter-btns-left">取消</view>
-              <view class="filter-btns-right">查看房源</view>
+              <view
+                class="filter-btns-left"
+                bind:tap="handlePriceFilterCancel"
+                >重置</view
+              >
+              <view
+                class="filter-btns-right"
+                bind:tap="handlePriceFilterConfirm"
+                >确定</view
+              >
             </view>
           </view>
         </t-dropdown-item>
@@ -45,15 +62,23 @@
                 wx:for="{{positionFilter.options}}"
                 data-item="{{item}}"
                 wx:key="index"
-                class="{{filter.price === item.value ? 'filter-price-item-active' : 'filter-price-item'}}"
-                bind:tap="handleFilterPriceTap"
+                class="{{utils.includes(filter.region, item.value) ? 'filter-price-item-active' : 'filter-price-item'}}"
+                bind:tap="handleFilterRegionTap"
               >
                 {{item.label}}
               </view>
             </view>
             <view class="filter-btns">
-              <view class="filter-btns-left">取消</view>
-              <view class="filter-btns-right">确定</view>
+              <view
+                class="filter-btns-left"
+                bind:tap="closeDropdownMenu2"
+                >取消</view
+              >
+              <view
+                class="filter-btns-right"
+                bind:tap="handleFilter2"
+                >确定</view
+              >
             </view>
           </view>
         </t-dropdown-item>
@@ -65,20 +90,20 @@
                 wx:for="{{houseTypeFilter.options}}"
                 data-item="{{item}}"
                 wx:key="index"
-                class="{{filter.price === item.value ? 'filter-price-item-active' : 'filter-price-item'}}"
-                bind:tap="handleFilterPriceTap"
+                class="{{utils.includes(filter.rental_type, item.value) ? 'filter-price-item-active' : 'filter-price-item'}}"
+                bind:tap="handleFilterRentalTypeTap"
               >
                 {{item.label}}
               </view>
             </view>
-            <view class="filter-more-name">出租房型</view>
+            <view class="filter-more-name">房源性质</view>
             <view class="filter-price-list">
               <view
-                wx:for="{{roomTypeFilter.options}}"
+                wx:for="{{propertyTypeFilter.options}}"
                 data-item="{{item}}"
                 wx:key="index"
-                class="{{filter.price === item.value ? 'filter-price-item-active' : 'filter-price-item'}}"
-                bind:tap="handleFilterPriceTap"
+                class="{{utils.includes(filter.property_type, item.value) ? 'filter-price-item-active' : 'filter-price-item'}}"
+                bind:tap="handleFilterPropertyTypeTap"
               >
                 {{item.label}}
               </view>
@@ -89,8 +114,8 @@
                 wx:for="{{roomFacilityFilter.options}}"
                 data-item="{{item}}"
                 wx:key="index"
-                class="{{filter.price === item.value ? 'filter-price-item-active' : 'filter-price-item'}}"
-                bind:tap="handleFilterPriceTap"
+                class="{{utils.includes(filter.room_facility, item.value) ? 'filter-price-item-active' : 'filter-price-item'}}"
+                bind:tap="handleFilterRoomFacilityTap"
               >
                 {{item.label}}
               </view>
@@ -100,55 +125,49 @@
               placeholder="请输入关键字"
               class="filter-more-keywords"
               borderless="{{true}}"
+              bind:change="handleInputChange"
             />
             <view class="filter-btns">
-              <view class="filter-btns-left">取消</view>
-              <view class="filter-btns-right">确定</view>
+              <view
+                class="filter-btns-left"
+                bind:tap="closeDropdownMenu3"
+                >取消</view
+              >
+              <view
+                class="filter-btns-right"
+                bind:tap="handleFilter3"
+                >确定</view
+              >
             </view>
           </view>
         </t-dropdown-item>
       </t-dropdown-menu>
-    </view>
+    </view></view
+  >
+  <view class="page-container">
     <view class="home-house-container">
-      <t-row gutter="14">
-        <t-col
-          span="12"
-          wx:for="{{houseList}}"
-          wx:key="index"
-          data-item="{{item}}"
-          bind:tap="handleGoHouseProfile"
-        >
-          <view class="home-house-item">
-            <view>
-              <t-image
-                mode="aspectFill"
-                class="home-house-image"
-                src="{{item.image}}"
-              ></t-image>
-            </view>
-            <view class="home-house-info">
-              <view>
-                <view class="home-house-title"> {{item.title}} </view>
-                <view class="home-house-desc"> {{ item.desc}}</view>
-              </view>
-              <view class="home-house-cost">
-                <view class="home-house-unit"> S$ </view>
-                <view class="home-house-price"> {{item.price}}/月 </view>
-              </view>
-              <view class="home-house-tags">
-                <view
-                  class="home-house-tag"
-                  wx:for="{{item.tags}}"
-                  wx:for-index="tagIndex"
-                  wx:for-item="tagItem"
-                  wx:key="tagIndex"
-                  >{{ tagItem}}</view
-                >
-              </view>
-            </view>
-          </view>
-        </t-col>
-      </t-row>
+      <view wx:if="{{houseList.length}}">
+        <house-list houseList="{{houseList}}"></house-list>
+      </view>
+      <view wx:else>
+        <t-image
+          class="my-no-data"
+          src="/assets/images/my/no_data.png"
+        ></t-image>
+      </view>
     </view>
+  </view>
+
+  <view wx:if="{{houseList.length}}">
+    <view
+      wx:if="{{hasMore}}"
+      style="display: flex; justify-content: center; font-size: 24rpx; color: #999"
+      >正在加载更多...</view
+    >
+    <view
+      wx:else
+      style="display: flex; justify-content: center; font-size: 24rpx; color: #999"
+      >没有更多数据了</view
+    >
   </view>
 </view>

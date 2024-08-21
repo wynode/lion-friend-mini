@@ -16,14 +16,20 @@
           </view>
         </view>
         <view class="mci-header-right">
-          <view class="mcihr-item">
+          <view
+            class="mcihr-item"
+            bind:tap="handleGoEdit"
+          >
             <t-image
               class="mcihr-item-img"
               src="/assets/images/my/edit.svg"
             ></t-image>
             <view class="mcihr-item-title"> 编辑</view>
           </view>
-          <view class="mcihr-item">
+          <view
+            class="mcihr-item"
+            bind:tap="handleGoSetting"
+          >
             <t-image
               class="mcihr-item-img"
               src="/assets/images/my/setting.svg"
@@ -38,6 +44,8 @@
           wx:for="{{userStatis}}"
           wx:key="index"
           class="mcis-item"
+          data-item="{{item}}"
+          bind:tap="handleProfileClick"
         >
           <view class="mcis-item-value">{{item.value}}</view>
           <view class="mcis-item-label"> {{item.label}} </view>
@@ -61,17 +69,80 @@
         <t-tab-panel
           label="收藏"
           value="1"
-          >选项二内容</t-tab-panel
-        >
+        ></t-tab-panel>
         <t-tab-panel
           label="点赞"
           value="2"
-          >选项三内容</t-tab-panel
-        >
+        ></t-tab-panel>
         <view>
-          <view>房源</view>
-          <view>文章</view>
-          <view>禁用</view>
+          <view class="nav-container">
+            <view class="nav-tabs">
+              <view
+                class="nav-tab {{currentTab === 0 ? 'active' : ''}}"
+                bindtap="switchTab"
+                data-index="0"
+              >
+                房源 {{houseList.length}}
+                <t-icon
+                  wx:if="{{currentTab === 0}}"
+                  name="chevron-down"
+                ></t-icon>
+              </view>
+              <view
+                class="nav-tab {{currentTab === 1 ? 'active' : ''}}"
+                bindtap="switchTab"
+                data-index="1"
+              >
+                文章 {{ articleList.length }}
+                <t-icon
+                  wx:if="{{currentTab === 1}}"
+                  name="chevron-down"
+                ></t-icon>
+              </view>
+              <!-- <view
+                class="nav-tab {{currentTab === 2 ? 'active' : ''}}"
+                bindtap="switchTab"
+                data-index="2"
+              >
+                服务
+                <t-icon
+                  wx:if="{{currentTab === 2}}"
+                  name="chevron-down"
+                ></t-icon>
+              </view> -->
+            </view>
+          </view>
+          <view
+            class="home-house-container"
+            wx:if="{{currentTab === 0}}"
+          >
+            <view wx:if="{{houseList.length}}">
+              <house-list houseList="{{houseList}}"></house-list>
+              <!-- <t-divider></t-divider> -->
+            </view>
+            <view wx:else>
+              <t-image
+                class="my-no-data"
+                src="/assets/images/my/no_data.png"
+              ></t-image>
+            </view>
+          </view>
+
+          <view
+            class="home-house-container"
+            wx:if="{{currentTab === 1}}"
+          >
+            <view wx:if="{{articleList.length}}">
+              <article-list articleList="{{articleList}}"></article-list>
+              <!-- <t-divider></t-divider> -->
+            </view>
+            <view wx:else>
+              <t-image
+                class="my-no-data"
+                src="/assets/images/my/no_data.png"
+              ></t-image>
+            </view>
+          </view>
         </view>
       </t-tabs>
     </view>

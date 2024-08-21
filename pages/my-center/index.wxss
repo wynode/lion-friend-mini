@@ -1,6 +1,6 @@
 page {
   box-sizing: border-box;
-  /* padding-bottom: calc(env(safe-area-inset-bottom) + 96rpx); */
+  padding-bottom: calc(env(safe-area-inset-bottom) + 96rpx);
 }
 
 .page-background {
@@ -128,6 +128,11 @@ page {
   opacity: 1;
   overflow: hidden;
   background: #ffffff;
+  padding: 0 30rpx;
+}
+
+.my-center-detail .nav-tab {
+  font-size: 22rpx !important;
 }
 
 .custom-tabs {
@@ -140,4 +145,45 @@ page {
 
 .custom-tabs .custom-tabs-acitve {
   font-weight: 500 !important;
+}
+
+.nav-container {
+  padding: 20rpx;
+  padding: 20rpx 230rpx;
+}
+
+.nav-tabs {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-tab {
+  padding: 10rpx 20rpx;
+
+  display: flex;
+  align-items: center;
+  min-width: 90rpx;
+
+  font-size: 20rpx;
+  font-weight: normal;
+  line-height: 38rpx;
+  color: #969696;
+  white-space: nowrap;
+}
+
+.nav-tab .t-icon {
+  margin-left: 4rpx;
+}
+
+.nav-tab.active {
+  color: #000000;
+}
+
+
+.my-no-data {
+  width: 122rpx;
+  height: 152rpx;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 101rpx;
 }

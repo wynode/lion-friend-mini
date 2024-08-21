@@ -1,0 +1,28 @@
+<view class="page-background">
+  <view class="page-container">
+    <view
+      wx:for="{{services}}"
+      wx:key="title"
+      class="item"
+    >
+      <t-image
+        class="item-left"
+        src="{{item.image}}"
+        shape="round"
+      />
+      <view class="item-right">
+        <view>
+          <view class="item-title">{{item.title}}</view>
+
+          <view class="item-desc">{{item.description}}</view>
+        </view>
+        <view
+          class="item-btn"
+          bind:tap="onServiceTap"
+          data-service="{{item}}"
+          >了解详情</view
+        >
+      </view>
+    </view>
+  </view>
+</view>
