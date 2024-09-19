@@ -26,8 +26,9 @@ Component({
       const filteredList = list.map((item) => {
         return {
           ...item,
-          title: item.title.length > 11 ? `${item.title.slice(0, 11)}...` : item.title,
-          desc: item.description.length > 30 ? `${item.description.slice(0, 30)}...` : item.description,
+          title: item.title && item.title.length > 11 ? `${item.title.slice(0, 11)}...` : item.title,
+          desc:
+            item.description && item.description.length > 30 ? `${item.description.slice(0, 30)}...` : item.description,
           image: item.images[0],
           tags: [`${item.area}㎡`, item.rental_type_cn, item.property_type_cn],
         };
@@ -41,9 +42,9 @@ Component({
 
     handleGoHouseProfile(e) {
       const { item } = e.currentTarget.dataset;
-      console.log('xxx');
+      console.log('xxx', item);
       wx.navigateTo({
-        url: `${this.data.goUrl}?id=${item.id}`,
+        url: `${this.data.goUrl}?id=${item.id}&type=${item.number_of_family_members ? 'host_family' : 'shared_rental'}`,
       });
     },
   },

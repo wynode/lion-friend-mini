@@ -1,18 +1,5 @@
 const app = getApp();
 
-const swiperList = [
-  'https://cdn.luminouscn.com/banner-01.png',
-  'https://cdn.luminouscn.com/banner-02.png',
-  'https://cdn.luminouscn.com/banner-03.png',
-  'https://cdn.luminouscn.com/banner-04.png',
-  'https://cdn.luminouscn.com/banner-05.png',
-  // '/assets/images/banner/banner1.jpg',
-  // '/assets/images/banner/banner2.jpg',
-  // '/assets/images/banner/banner3.jpg',
-  // '/assets/images/banner/banner4.jpg',
-  // '/assets/images/banner/banner5.jpg',
-];
-
 const serviceList = [
   {
     id: 1,
@@ -46,8 +33,9 @@ Page({
     autoplay: true,
     duration: 500,
     interval: 5000,
+    banner: [],
 
-    swiperList,
+    swiperList: [],
     serviceList,
     houseList: [],
     pageNum: 1,
@@ -67,6 +55,9 @@ Page({
     app.request('/index_notify/', 'GET').then((res) => {
       this.setData({ content: res });
     });
+    app.request('/banner/', 'GET').then((res) => {
+      this.setData({ banner: res.results, swiperList: res.results.map((item) => item.image_url) });
+    });
   },
 
   // 上拉触底事件
@@ -80,13 +71,14 @@ Page({
   // 加载房源列表
   async loadHouseList() {
     if (!this.data.hasMore) return;
-
+    wx.showLoading();
     // 这里替换为你的实际 API 调用
     const res = await app.request('/curated_shared_rental/', 'GET', {
       page: this.data.pageNum,
       page_size: this.data.pageSize,
       // ... 其他可能的参数
     });
+    wx.hideLoading();
     const newHouseList = res.results; // 假设 API 返回的数据结构
 
     this.setData({
@@ -117,16 +109,13 @@ Page({
     }
   },
 
-  handleGoHouseProfile(e) {
-    const { item } = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: `/pages/house-profile/index?id=${item.id}`,
-    });
-  },
-
-  onTap(e) {
+  onSwiperTap(e) {
     const { index } = e.detail;
-
-    console.log(index);
+    const urlItem = this.data.banner[index];
+    if (urlItem.url && urlItem.url.includes('/pages')) {
+      wx.navigateTo({
+        url: urlItem.url,
+      });
+    }
   },
 });

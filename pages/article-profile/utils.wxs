@@ -1,0 +1,36 @@
+var formatTime = function(timestamp, format) {
+  if (!timestamp) return '';
+  
+  var date = getDate(timestamp);
+  
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+
+  var formatObj = {
+    'Y+': year,
+    'M+': padZero(month),
+    'D+': padZero(day),
+    'H+': padZero(hour),
+    'm+': padZero(minute),
+    's+': padZero(second)
+  };
+
+  var regKeys = getRegExp('(' + 'Y+|M+|D+|H+|m+|s+' + ')', 'g');
+  
+  return format.replace(regKeys, function(match) {
+    var key = match.charAt(0);
+    return formatObj[key + '+'] || match;
+  });
+};
+
+var padZero = function(num) {
+  return num < 10 ? '0' + num : '' + num;
+};
+
+module.exports = {
+  formatTime: formatTime
+};

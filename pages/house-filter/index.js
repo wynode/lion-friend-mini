@@ -141,6 +141,14 @@ Page({
     }
   },
 
+  onHide() {
+    wx.setStorageSync('isMap', false);
+  },
+
+  onUnload() {
+    wx.setStorageSync('isMap', false);
+  },
+
   // 上拉触底事件
   onReachBottom() {
     if (this.data.hasMore) {
@@ -192,7 +200,12 @@ Page({
     }
 
     const queryString = objectToQueryString(params);
-    const url = `/${houseType}/${queryString ? '?' + queryString : ''}`;
+    let url = `/${houseType}/${queryString ? '?' + queryString : ''}`;
+    const isMap = wx.getStorageSync('isMap');
+    if (isMap) {
+      const { longitude, latitude, selectedRadius } = wx.getStorageSync('mapSearch');
+      url = `/shared_rental/search_by_map/?lng=${longitude}&lat=${latitude}&radius=${selectedRadius}`;
+    }
 
     const res = await app.request(url, 'GET', {
       page: this.data.pageNum,
@@ -204,13 +217,6 @@ Page({
       houseList: isReach ? [...this.data.houseList, ...newHouseList] : newHouseList,
       pageNum: this.data.pageNum + 1,
       hasMore: newHouseList.length === this.data.pageSize,
-    });
-  },
-
-  handleGoHouseProfile(e) {
-    const { item } = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: `/pages/house-profile/index?id=${item.id}`,
     });
   },
 

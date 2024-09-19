@@ -11,7 +11,6 @@ page {
   /* padding: 30rpx; */
 }
 
-
 .my-center-detail {
   border-radius: 18rpx;
   opacity: 1;
@@ -37,10 +36,13 @@ page {
   padding: 0;
 } */
 
-.t-tabs__content {
-  background-color: #f7f8fa;
-  overflow: auto;
+.scroll-view-o {
   height: calc(100vh - env(safe-area-inset-bottom) - 200rpx);
+}
+.t-tabs__content {
+  /* background-color: #f7f8fa; */
+  /* overflow: auto; */
+  /* height: calc(100vh - env(safe-area-inset-bottom) - 200rpx); */
 }
 .t-tabs__content-inner {
   /* height: 100%; */
@@ -50,7 +52,7 @@ page {
 
 .list-container {
   padding-top: 40rpx;
-  height: calc(100vh - env(safe-area-inset-bottom) - 200rpx);
+  /* height: calc(100vh - env(safe-area-inset-bottom) - 200rpx); */
   overflow: auto;
   /* padding-bottom: 40rpx; */
   box-sizing: border-box;

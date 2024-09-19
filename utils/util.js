@@ -2,6 +2,8 @@ import dayjs from 'dayjs';
 
 const formatTime = (date, template) => dayjs(date).format('YYYY-MM-DD HH:mm:ss');
 
+const formatTimeX = (date, template) => dayjs(date).format(template);
+
 /**
  * 格式化价格数额为字符串
  * 可对小数部分进行填充，默认不填充
@@ -124,6 +126,7 @@ const phoneRegCheck = (phone) => {
 
 module.exports = {
   formatTime,
+  formatTimeX,
   priceFormat,
   cosThumb,
   get,

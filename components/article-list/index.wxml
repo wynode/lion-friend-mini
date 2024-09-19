@@ -10,6 +10,7 @@
       <view class="article-item">
         <t-image
           mode="aspectFill"
+          lazy
           class="article-image"
           src="{{item.images ? item.images[0] : ''}}"
         ></t-image>

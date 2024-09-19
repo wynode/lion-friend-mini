@@ -26,10 +26,10 @@
         autoplay="{{autoplay}}"
         duration="{{duration}}"
         interval="{{interval}}"
-        navigation="{{ { type: 'dots' } }}"
+        navigation="{{ { type:  'dots-bar' } }}"
         list="{{houseInfo.images}}"
-        height="320"
-        bind:click="onTap"
+        height="650rpx"
+        bind:click="handleImageClick"
       >
       </t-swiper>
     </view>
@@ -100,7 +100,7 @@
       </view>
     </view>
 
-    <view class="house-up">
+    <view class="house-up" bind:tap="handleGoOtherProfile">
       <view class="hu-title"> TA的主页 </view>
       <view class="hu-header">
         <t-image
@@ -249,6 +249,11 @@
     bind:visible-change="onVisible2Change"
     placement="bottom"
   >
-    <view><t-image style="width: 750rpx; height: 455rpx" src="/assets/images/house/share.jpg"></t-image></view>
+    <view
+      ><t-image
+        style="width: 750rpx; height: 455rpx"
+        src="/assets/images/house/share.jpg"
+      ></t-image
+    ></view>
   </t-popup>
 </view>

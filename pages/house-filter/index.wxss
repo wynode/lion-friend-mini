@@ -4,6 +4,7 @@ page {
 
 .page-background {
   background-color: #f7f8fa;
+  min-height: calc(100vh - 180rpx);
   padding-bottom: calc(env(safe-area-inset-bottom) + 10rpx);
 }
 

@@ -1,13 +1,13 @@
 <view class="page-background">
   <view class="home-swiper-container">
     <t-swiper
-      current="{{current}}"
+      current="{{0}}"
       autoplay="{{autoplay}}"
       duration="{{duration}}"
       interval="{{interval}}"
       navigation="{{ { type: 'dots' } }}"
       list="{{swiperList}}"
-      bind:click="onTap"
+      bind:click="onSwiperTap"
       height="400rpx"
     >
     </t-swiper>

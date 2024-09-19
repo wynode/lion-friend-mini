@@ -1,28 +1,48 @@
+<wxs
+  src="./utils.wxs"
+  module="utils"
+/>
+
 <view class="page-background">
   <view class="page-container">
-    <view class="top">
+    <view class="top" bind:tap="handleGoOtherProfile">
       <view class="top-left">
         <t-image
           class="avatar"
           shape="circle"
           mode="aspectFill"
-          src="{{articleInfo.avatar}}"
+          src="{{articleInfo.avatar_url}}"
         ></t-image>
-        <view class="username">{{articleInfo.username}}</view>
+        <view class="username">{{articleInfo.deployer_cn}}</view>
       </view>
-      <view class="top-right">● ● ●</view>
+      <view class="top-right">
+        <t-image
+          class="top-right-icon"
+          src="/assets/images/house/go_user.png"
+        >
+        </t-image
+      ></view>
     </view>
+
     <view class="banner">
-      <t-image
-        class="banner-image"
-        mode="aspectFill"
-        src="{{articleInfo.banner}}"
-      ></t-image>
+      <t-swiper
+        current="{{0}}"
+        autoplay="{{false}}"
+        duration="{{500}}"
+        interval="{{5000}}"
+        list="{{articleInfo.images}}"
+        height="650rpx"
+        bind:click="handleImageClick"
+        navigation="{{ { type: 'dots-bar' } }}"
+      />
     </view>
+
     <view class="content">
       <view class="title"> {{articleInfo.title}}</view>
-      <view class="desc">{{articleInfo.desc}}</view>
-      <view class="ip-time"> IP：{{articleInfo.ip}} | 发布于{{articleInfo.update_time}} </view>
+      <view class="desc">{{articleInfo.content}}</view>
+      <view class="ip-time">
+        IP：{{articleInfo.ip_country}} | 发布于{{utils.formatTime(articleInfo.created_at, 'MM-DD HH:mm')}}
+      </view>
       <t-divider></t-divider>
       <view class="location-title">位置信息</view>
       <view class="map">
@@ -30,18 +50,18 @@
           id="myMap"
           class="myMap"
           style="width: 100%; height: 360rpx"
-          latitude="{{articleInfo.location.latitude}}"
-          longitude="{{articleInfo.location.longitude}}"
+          latitude="{{articleInfo.lat}}"
+          longitude="{{articleInfo.lng}}"
           markers="{{markers}}"
           bindtap="handleMarketTap"
           show-location
         >
         </map>
       </view>
-      <view class="c-title">评论</view>
+      <view class="c-title">评论 {{articleInfo.comments.length}}</view>
       <view>
         <view
-          wx:for="{{articleInfo.comment}}"
+          wx:for="{{articleInfo.comments}}"
           wx:key="index"
           class="c-item"
         >
@@ -49,12 +69,12 @@
             class="c-avatar"
             shape="circle"
             mode="aspectFill"
-            src="{{item.avatar}}"
+            src="{{item.avatar_url}}"
           ></t-image>
 
           <view class="c-right">
             <view class="c-name"
-              >{{item.name}}
+              >{{item.deployer_cn}}
               <view
                 class="c-tag"
                 wx:if="{{ritem.tag}}"
@@ -62,14 +82,23 @@
               ></view
             >
             <view class="c-content">{{item.content}}</view>
-            <view class="c-ip-time">{{item.ip}} | {{item.update_time}}</view>
+            <view class="c-bottom">
+              <view class="c-ip-time">{{item.ip_country}} | {{utils.formatTime(item.created_at, 'MM-DD HH:mm')}} </view>
+              <view
+                class="c-reply"
+                data-item="{{item}}"
+                bindtap="showReplyModal"
+              >
+                回复
+              </view>
+            </view>
             <t-divider></t-divider>
             <view
-              wx:if="{{item.reply && item.reply.length}}"
+              wx:if="{{item.child_comments && item.child_comments.length}}"
               class="c-reply"
             >
               <view
-                wx:for="{{item.reply}}"
+                wx:for="{{item.child_comments}}"
                 wx:for-item="ritem"
                 wx:for-index="index"
                 wx:key="index"
@@ -84,7 +113,7 @@
 
                 <view class="c-right">
                   <view class="c-name"
-                    >{{ritem.name}}
+                    >{{ritem.deployer_cn}}
                     <view
                       class="c-tag"
                       wx:if="{{ritem.tag}}"
@@ -92,57 +121,91 @@
                     >
                   </view>
                   <view class="c-content">{{ritem.content}}</view>
-                  <view class="c-ip-time">{{ritem.ip}} | {{ritem.update_time}}</view>
+                  <view class="c-bottom">
+                    <view class="c-ip-time"
+                      >{{ritem.ip_country}} | {{utils.formatTime(ritem.created_at, 'MM-DD HH:mm')}}
+                    </view>
+                    <view
+                      class="c-reply"
+                      data-item="{{ritem}}"
+                      bindtap="showReplyModal"
+                    >
+                      回复
+                    </view>
+                  </view>
                 </view>
+                <t-divider></t-divider>
               </view>
-              <t-divider></t-divider>
             </view>
           </view>
         </view>
+        <view class="nothing">- 没有了 -</view>
       </view>
-      <view class="nothing">- 没有了 -</view>
     </view>
     <view class="bottom">
-      <view class="b-item" style="margin-top: 4rpx;">
-        <t-image
-          style="width: 34rpx; height: 30rpx"
-          src="/assets/images/house/heart-select.png"
-          wx:if="{{articleInfo.is_like}}"
-          data-item="like"
-          bind:tap="handleHouseUserOpreation"
-        />
-        <t-image
-          style="width: 34rpx; height: 30rpx"
-          src="/assets/images/house/heart.png"
-          wx:else
-          data-item="unLike"
-          bind:tap="handleHouseUserOpreation"
-        />
-      </view>
-      <view class="b-item">
-        <t-image
-          style="width: 34rpx; height: 34rpx"
-          src="/assets/images/house/star-select.png"
-          wx:if="{{articleInfo.is_collect}}"
-          data-item="collect"
-          bind:tap="handleHouseUserOpreation"
-        />
-        <t-image
-          style="width: 34rpx; height: 34rpx"
-          src="/assets/images/house/star.png"
-          wx:else
-          data-item="unCollect"
-          bind:tap="handleHouseUserOpreation"
-        />
-      </view>
-      <view class="b-item">
-        <t-image
-          style="width: 30rpx; height: 31rpx"
-          src="/assets/images/house/forward.png"
-          data-item="forward"
-          bind:tap="handleHouseUserOpreation"
-        />
+      <view
+        class="bottom-left"
+        bindtap="showReplyModal2"
+        >说点什么</view
+      >
+      <view class="bottom-right">
+        <view
+          class="b-item"
+          style="margin-top: 4rpx"
+        >
+          <t-image
+            style="width: 34rpx; height: 30rpx"
+            src="/assets/images/house/heart-select.png"
+            wx:if="{{articleInfo.is_like}}"
+            data-item="like"
+            bind:tap="handleHouseUserOpreation"
+          />
+          <t-image
+            style="width: 34rpx; height: 30rpx"
+            src="/assets/images/house/heart.png"
+            wx:else
+            data-item="unLike"
+            bind:tap="handleHouseUserOpreation"
+          />
+        </view>
+        <view class="b-item">
+          <t-image
+            style="width: 34rpx; height: 34rpx"
+            src="/assets/images/house/star-select.png"
+            wx:if="{{articleInfo.is_collect}}"
+            data-item="collect"
+            bind:tap="handleHouseUserOpreation"
+          />
+          <t-image
+            style="width: 34rpx; height: 34rpx"
+            src="/assets/images/house/star.png"
+            wx:else
+            data-item="unCollect"
+            bind:tap="handleHouseUserOpreation"
+          />
+        </view>
+        <view class="b-item">
+          <t-image
+            style="width: 30rpx; height: 31rpx"
+            src="/assets/images/house/forward.png"
+            data-item="forward"
+            bind:tap="handleHouseUserOpreation"
+          />
+        </view>
       </view>
     </view>
   </view>
+  <t-popup
+    visible="{{visible2}}"
+    usingCustomNavbar
+    bind:visible-change="onVisible2Change"
+    placement="bottom"
+  >
+    <view
+      ><t-image
+        style="width: 750rpx; height: 455rpx"
+        src="/assets/images/house/share.jpg"
+      ></t-image
+    ></view>
+  </t-popup>
 </view>

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "编辑个人信息",
+  "navigationBarTitleText": "佣金明细",
   "onReachBottomDistance": 10,
   "backgroundTextStyle": "light",
   "enablePullDownRefresh": false,
@@ -19,7 +19,6 @@
     "t-button": "tdesign-miniprogram/button/button",
     "t-divider": "tdesign-miniprogram/divider/divider",
     "t-input": "tdesign-miniprogram/input/input",
-    "t-textarea": "tdesign-miniprogram/textarea/textarea",
     "t-dropdown-menu": "tdesign-miniprogram/dropdown-menu/dropdown-menu",
     "t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",

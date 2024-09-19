@@ -10,6 +10,7 @@ Page({
   onShow(options) {
     console.log(options);
     this.getTabBar().init();
+    this.loadArticleList();
   },
 
   // 上拉触底事件
@@ -21,18 +22,20 @@ Page({
   },
 
   onLoad() {
-    this.loadArticleList();
+    // this.loadArticleList();
   },
 
   // 加载房源列表
   async loadArticleList() {
     if (!this.data.hasMore) return;
     // 这里替换为你的实际 API 调用
+    wx.showLoading();
     const res = await app.request('/community/articles/', 'GET', {
       page: this.data.pageNum,
       page_size: this.data.pageSize,
       // ... 其他可能的参数
     });
+    wx.hideLoading();
     const newArticleList = res.results; // 假设 API 返回的数据结构
 
     this.setData({

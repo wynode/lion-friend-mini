@@ -20,7 +20,6 @@ const facilityImageMap = {
   桌子: '/assets/images/house/zy.svg',
 };
 
-
 // 转换函数
 function convertToFacilities(roomFacilities) {
   return roomFacilities.map((facility) => ({
@@ -74,6 +73,7 @@ Page({
   data: {
     longitude: 103.851959,
     latitude: 1.29027,
+    extUserId: 0,
     markers: [
       {
         id: 1,
@@ -148,63 +148,120 @@ Page({
       age: '',
       phone: '',
     },
+    second_parent: '',
+    parent: '',
     visible2: false,
   },
 
   onShareAppMessage() {
+    const comData = {
+      parent: this.data.extUserId,
+      second_parent: this.data.parent,
+    };
     return {
       title: '快来看！我在星辉租房发现一套非常棒的房源！',
-      path: '/pages/house-profile/index?id=1001',
+      path: `/pages/house-profile/index?id=${this.data.houseInfo.id}&type=${this.data.houstType}&parent=${comData.parent}&second_parent=${comData.second_parent}`,
       // imageUrl: '/path/to/your/share-image.png'  // 可选，自定义转发的图片
     };
   },
 
   onShareTimeline() {
+    const comData = {
+      parent: this.data.extUserId,
+      second_parent: this.data.parent,
+    };
     return {
       title: '快来看！我在星辉租房发现一套非常棒的房源！',
-      query: 'id=1001',
+      query: `id=${this.data.houseInfo.id}&type=${this.data.houstType}&parent=${comData.parent}&second_parent=${comData.second_parent}`,
       // imageUrl: '/path/to/your/share-image.png'  // 可选，自定义转发的图片
     };
   },
 
-  async onLoad(options) {
-    const { id, type } = options || {};
-    console.log(id);
-    let res = {};
-    if (type === 'hosting') {
-      this.setData({ houstType: 'host_family' });
-      res = await app.request(`/host_family/${id}/`);
-    } else {
-      this.setData({ houstType: 'shared_rental' });
-      res = await app.request(`/shared_rental/${id}/`);
-    }
-    this.setData({
-      houseInfo: {
-        ...res,
-        facilities: convertToFacilities(res.room_facility),
-        details: extractDetails(res),
-        is_like: res.is_current_like,
-        is_collect: res.is_current_favorite,
-      },
-      markers: [
-        {
-          id: 1,
-          longitude: res.location.lng || this.data.longitude,
-          latitude: res.location.lat || this.data.latitude,
-          iconPath: '/assets/images/house/mark.svg',
-          joinCluster: true,
-          width: 40,
-          height: 44,
-        },
-      ],
-      userInfo: {
-        ...res.deployer_data,
-        tags: [
-          `房源${res.deployer_data.host_family_count + res.deployer_data.shared_rental_count}`,
-          `文章${res.deployer_data.student_service_count}`,
-        ],
-      },
+  handleImageClick(e) {
+    const { index } = e.detail;
+    const { images } = this.data.houseInfo;
+
+    wx.previewImage({
+      current: images[index], // 当前显示图片的链接
+      urls: images, // 需要预览的图片链接列表
     });
+  },
+
+  handleGoOtherProfile() {
+    wx.setStorageSync('otherId', this.data.userInfo.id);
+    wx.navigateTo({
+      url: '/pages/other-center/index',
+    });
+  },
+
+  async onLoad(options) {
+    try {
+      wx.showLoading();
+      const { id, type, parent, second_parent = '' } = options || {};
+      console.log(id, type, parent, second_parent);
+      const token = wx.getStorageSync('access');
+      if (!token) {
+        wx.setStorageSync('isProfile', true);
+        wx.navigateTo({
+          url: '/pages/login/index',
+        });
+      }
+      const myId = await app.request('/my_user_id/', 'GET');
+      this.setData({
+        extUserId: myId.ext_user_id,
+      });
+      if (parent) {
+        const payload = {
+          parent,
+          second_parent,
+          action: 'view',
+          [`${type}_id`]: id,
+        };
+        this.setData({ parent, second_parent });
+
+        await app.request('/wallet/auto_compute/', 'POST', {
+          ...payload,
+        });
+      }
+      let res = {};
+      if (type === 'host_family') {
+        this.setData({ houstType: 'host_family' });
+        res = await app.request(`/host_family/${id}/`);
+      } else {
+        this.setData({ houstType: 'shared_rental' });
+        res = await app.request(`/shared_rental/${id}/`);
+      }
+      wx.hideLoading();
+      this.setData({
+        houseInfo: {
+          ...res,
+          facilities: convertToFacilities(res.room_facility),
+          details: extractDetails(res),
+          is_like: res.is_current_like,
+          is_collect: res.is_current_favorite,
+        },
+        markers: [
+          {
+            id: 1,
+            longitude: res.location.lng || this.data.longitude,
+            latitude: res.location.lat || this.data.latitude,
+            iconPath: '/assets/images/house/mark.svg',
+            joinCluster: true,
+            width: 40,
+            height: 44,
+          },
+        ],
+        userInfo: {
+          ...res.deployer_data,
+          tags: [
+            `房源${res.deployer_data.host_family_count + res.deployer_data.shared_rental_count}`,
+            `文章${res.deployer_data.student_service_count}`,
+          ],
+        },
+      });
+    } catch {
+      wx.hideLoading();
+    }
   },
 
   handleMarketTap(e) {
@@ -305,19 +362,37 @@ Page({
       });
       return;
     }
+    if (this.data.formData.name.length < 2) {
+      wx.showToast({
+        title: '请填入正确的姓名',
+        icon: 'none',
+      });
+      return;
+    }
     try {
-      await app.request(`/order/${this.data.houstType}/`, 'POST', {
+      wx.showLoading();
+      const res = await app.request(`/order/${this.data.houstType}/`, 'POST', {
         holder_name: this.data.formData.name,
         holder_gender: this.data.formData.gender,
         holder_age: this.data.formData.age,
         holder_mobile: this.data.formData.phone,
         [this.data.houstType]: this.data.houseInfo.id,
       });
+      await app.request('/wallet/auto_compute/', 'POST', {
+        order_id: res.id,
+        parent: this.data.parent,
+        second_parent: this.data.second_parent,
+        action: 'order',
+        [`${this.data.houstType}_id`]: this.data.houseInfo.id,
+      });
       wx.showToast({
         title: '提交成功',
       });
       this.closePopup();
-    } catch {}
+      wx.hideLoading();
+    } catch {
+      wx.hideLoading();
+    }
 
     // 这里可以添加表单验证逻辑
     // 如果验证通过，可以发送请求到服务器

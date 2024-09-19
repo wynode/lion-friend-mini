@@ -1,6 +1,11 @@
-<t-navbar title="{{editType === 'nickname' ? '修改昵称' : '修改简介'}}" left-arrow bind:go-back="onBack" />
+<t-navbar
+  title="{{editType === 'nickname' ? '修改昵称' : '修改简介'}}"
+  left-arrow
+  bind:go-back="onBack"
+/>
 
 <view class="edit-container">
+  <!-- <view>{{editType === 'nickname' ? '修改昵称' : editType === 'mobile' ? '修改手机号': '修改简介'}}</view> -->
   <t-input
     wx:if="{{editType === 'nickname'}}"
     value="{{inputValue}}"
@@ -8,12 +13,27 @@
     maxlength="{{10}}"
     bind:change="onInputChange"
   >
-    <view slot="suffix" class="input-counter">{{inputValue.length}}/10</view>
+    <view
+      slot="suffix"
+      class="input-counter"
+      >{{inputValue.length}}/10</view
+    >
+  </t-input>
+
+  <t-input
+    wx:if="{{editType === 'mobile'}}"
+    value="{{inputValue}}"
+    placeholder="请输入电话号码"
+    bind:change="onInputChange"
+  >
+    <view>{{inputValue.length}}</view>
   </t-input>
 
   <t-textarea
-    wx:if="{{editType === 'description'}}"
+    wx:if="{{editType === 'profile'}}"
     value="{{inputValue}}"
+    bordered
+    style="height: 400rpx"
     placeholder="个性签名介绍，最多100个字"
     maxlength="{{100}}"
     autosize
@@ -22,6 +42,12 @@
   />
 
   <view class="footer">
-    <t-button theme="primary" block size="large" bind:tap="onSave">保存</t-button>
+    <t-button
+      theme="primary"
+      block
+      size="large"
+      bind:tap="onSave"
+      >保存</t-button
+    >
   </view>
 </view>

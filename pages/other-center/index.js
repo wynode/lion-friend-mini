@@ -13,8 +13,6 @@ Page({
   },
 
   onShow(options) {
-    console.log(options);
-    this.getTabBar().init();
     this.handleInitPage();
   },
 
@@ -34,26 +32,25 @@ Page({
 
   async handleInitPage() {
     wx.showLoading();
-    app.request('/my_user_id/', 'GET').then((res) => {
+    const otherId = wx.getStorageSync('otherId');
+    this.setData({
+      ext_user_id: otherId,
+    });
+    console.log(otherId);
+    app.request(`/ext_user/${otherId}/`, 'GET').then((res) => {
       this.setData({
-        ext_user_id: res.ext_user_id,
+        userInfo: res,
+        userStatis: [
+          { label: '关注', value: res.following_count },
+          { label: '粉丝', value: res.follower_count },
+          // { label: '积分', value: res.score_points },
+          // { label: '佣金', value: res.commission },
+        ],
       });
-      wx.setStorageSync('myId', res);
-      app.request(`/ext_user/${res.ext_user_id}/`, 'GET').then((res) => {
-        this.setData({
-          userInfo: res,
-          userStatis: [
-            { label: '关注', value: res.following_count },
-            { label: '粉丝', value: res.follower_count },
-            { label: '积分', value: res.score_points },
-            { label: '佣金', value: res.commission },
-          ],
-        });
-        wx.hideLoading();
-        setTimeout(() => {
-          this.onTabsChange();
-        }, 500);
-      });
+      wx.hideLoading();
+      setTimeout(() => {
+        this.onTabsChange();
+      }, 500);
     });
   },
 
@@ -62,10 +59,6 @@ Page({
     if (item.label === '积分') {
       wx.navigateTo({
         url: '/pages/integral-profile/index',
-      });
-    } else if (item.label === '佣金') {
-      wx.navigateTo({
-        url: '/pages/commission-profile/index',
       });
     }
   },

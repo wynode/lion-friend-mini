@@ -22,6 +22,9 @@
     "t-dropdown-menu": "tdesign-miniprogram/dropdown-menu/dropdown-menu",
     "t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-swiper": "tdesign-miniprogram/swiper/swiper",
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "t-swiper-nav": "tdesign-miniprogram/swiper-nav/swiper-nav",
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel"
   }
 }

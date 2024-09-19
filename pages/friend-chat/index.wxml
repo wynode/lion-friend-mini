@@ -8,7 +8,8 @@
       >
         <image
           class="qr-code"
-          src="{{item.qrCode}}"
+          src="{{item.image_url}}"
+          show-menu-by-longpress="{{true}}"
           mode="aspectFit"
           bindtap="previewQR"
           data-id="{{item.id}}"
@@ -24,7 +25,8 @@
       <view class="dialog">
         <image
           class="qr-code"
-          src="{{cur.qrCode}}"
+          src="{{cur.image_url}}"
+          show-menu-by-longpress="{{true}}"
           mode="aspectFit"
           bindtap="previewQR"
           data-id="{{cur.id}}"

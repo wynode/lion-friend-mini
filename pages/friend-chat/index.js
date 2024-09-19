@@ -1,21 +1,23 @@
 const app = getApp();
 Page({
   data: {
-    groups: [
-      { id: 1, name: '优选合租群', qrCode: 'https://cdn.lzdss.sg/qrcode.jpg' },
-      { id: 2, name: '优选合租群', qrCode: 'https://cdn.lzdss.sg/qrcode.jpg' },
-      { id: 3, name: '低龄寄宿群', qrCode: 'https://cdn.lzdss.sg/qrcode.jpg' },
-      { id: 4, name: '狮城留学群', qrCode: 'https://cdn.lzdss.sg/qrcode.jpg' },
-      { id: 5, name: '低龄寄宿群', qrCode: 'https://cdn.lzdss.sg/qrcode.jpg' },
-      { id: 6, name: '狮城留学群', qrCode: 'https://cdn.lzdss.sg/qrcode.jpg' },
-    ],
-    cur: { id: 6, name: '狮城留学群', qrCode: 'https://cdn.lzdss.sg/qrcode.jpg' },
+    // groups: [
+    //   { id: 1, name: '优选合租群', image_url: 'https://cdn.lzdss.sg/image_url.jpg' },
+    //   { id: 2, name: '优选合租群', image_url: 'https://cdn.lzdss.sg/image_url.jpg' },
+    //   { id: 3, name: '低龄寄宿群', image_url: 'https://cdn.lzdss.sg/image_url.jpg' },
+    //   { id: 4, name: '狮城留学群', image_url: 'https://cdn.lzdss.sg/image_url.jpg' },
+    //   { id: 5, name: '低龄寄宿群', image_url: 'https://cdn.lzdss.sg/image_url.jpg' },
+    //   { id: 6, name: '狮城留学群', image_url: 'https://cdn.lzdss.sg/image_url.jpg' },
+    // ],
+    groups: [],
+    cur: { id: 6, name: '狮城留学群', image_url: 'https://cdn.lzdss.sg/image_url.jpg' },
     visible: false,
   },
 
   onShow(options) {
     console.log(options);
     this.getTabBar().init();
+    this.handleInitPage();
   },
 
   onLoad(options) {
@@ -25,9 +27,9 @@ Page({
   },
 
   async handleInitPage() {
-    app.request(`/course/`).then((res) => {
+    app.request(`/community/groups/?page=1&page_size=100`).then((res) => {
       this.setData({
-        res,
+        groups: res.results,
       });
     });
   },

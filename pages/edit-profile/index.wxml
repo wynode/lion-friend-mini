@@ -8,7 +8,7 @@
         bind:click="onEditAvatar"
       >
         <t-avatar
-          image="{{userInfo.avatar}}"
+          image="{{userInfo.avatar_url}}"
           shape="circle"
           size="large"
           slot="note"
@@ -25,14 +25,14 @@
         title="简介"
         arrow
         hover
-        note="{{userInfo.description}}"
+        note="{{userInfo.profile}}"
         bind:click="onEditDescription"
       />
       <t-cell
         title="电话"
         arrow
         hover
-        note="{{userInfo.phone}}"
+        note="{{userInfo.mobile}}"
         bind:click="onEditPhone"
       />
       <view class="description">
@@ -46,7 +46,7 @@
       </view>
     </t-cell-group>
   </view>
-  <view class="footer">
+  <!-- <view class="footer">
     <t-button
       theme="primary"
       block
@@ -54,5 +54,5 @@
       bind:tap="onSave"
       >保存</t-button
     >
-  </view>
+  </view> -->
 </view>

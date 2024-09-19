@@ -4,33 +4,33 @@
     <t-cell title="允许他人查看我的发布">
       <t-switch
         slot="note"
-        defaultValue="{{true}}"
+        value="{{item.show_publish}}"
         bind:change="onSwitchChange"
-        data-key="viewPosts"
+        data-key="show_publish"
       />
     </t-cell>
     <t-cell title="允许他人查看我的收藏">
       <t-switch
         slot="note"
-        defaultValue="{{false}}"
+        value="{{item.show_favorite}}"
         bind:change="onSwitchChange"
-        data-key="viewFavorites"
+        data-key="show_favorite"
       />
     </t-cell>
     <t-cell title="允许他人查看我的赞过">
       <t-switch
         slot="note"
-        defaultValue="{{true}}"
+        value="{{item.show_like}}"
         bind:change="onSwitchChange"
-        data-key="viewLikes"
+        data-key="show_like"
       />
     </t-cell>
     <t-cell title="允许他人查看我的粉丝与关注">
       <t-switch
         slot="note"
-        defaultValue="{{true}}"
+        value="{{item.show_followers_and_following}}"
         bind:change="onSwitchChange"
-        data-key="viewFollowers"
+        data-key="show_followers_and_following"
       />
     </t-cell>
   </t-cell-group>

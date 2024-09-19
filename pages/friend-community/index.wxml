@@ -6,45 +6,49 @@
         bind:change="onTabsChange"
         t-class="custom-tabs"
         t-class-content="custom-panel"
-        t-class-active="custom-tabs-acitve"
+        t-class-active="custom-tabs-active"
       >
         <t-tab-panel
           label="发现"
           value="0"
-        >
-        </t-tab-panel>
+        ></t-tab-panel>
         <t-tab-panel
           label="关注"
           value="1"
         ></t-tab-panel>
-        <view>
-          <view class="list-container">
-            <view wx:if="{{articleList.length}}">
-              <article-list articleList="{{articleList}}"></article-list>
-              <!-- <t-divider></t-divider> -->
-            </view>
-            <view wx:else>
-              <t-image
-                class="my-no-data"
-                src="/assets/images/my/no_data.png"
-              ></t-image>
-            </view>
+      </t-tabs>
+
+      <scroll-view
+        scroll-y="{{true}}"
+        class="scroll-view-o"
+        bindscrolltolower="onReachBottom"
+        lower-threshold="50"
+      >
+        <view class="list-container">
+          <view wx:if="{{articleList.length}}">
+            <article-list articleList="{{articleList}}"></article-list>
+          </view>
+          <view wx:else>
+            <t-image
+              class="my-no-data"
+              src="/assets/images/my/no_data.png"
+            ></t-image>
           </view>
         </view>
 
         <view wx:if="{{articleList.length}}">
           <view
             wx:if="{{hasMore}}"
-            style="display: flex; justify-content: center; font-size: 24rpx; color: #999"
+            style="display: flex; justify-content: center; font-size: 24rpx; color: #999; padding-bottom: 10rpx;"
             >正在加载更多...</view
           >
           <view
             wx:else
-            style="display: flex; justify-content: center; font-size: 24rpx; color: #999"
+            style="display: flex; justify-content: center; font-size: 24rpx; color: #999; padding-bottom: 10rpx;"
             >没有更多数据了</view
           >
         </view>
-      </t-tabs>
+      </scroll-view>
     </view>
   </view>
 </view>

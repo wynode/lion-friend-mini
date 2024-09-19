@@ -14,7 +14,7 @@
         <view class="item-details">
           <view
             class="item-detail"
-            wx:for="{{item.details}}"
+            wx:for="{{item.desc_list}}"
             wx:key="index"
             wx:for-item="detailItem"
           >
@@ -41,7 +41,7 @@
           style="margin-top: 26rpx"
         >
           <view class="dialog-item"
-            >电话：{{dialogItem.phone}}
+            >电话：{{dialogItem.mobile}}
             <view
               bind:tap="onPhoneTap"
               data-item="{{item}}"
@@ -50,7 +50,7 @@
             ></view
           >
           <view class="dialog-item"
-            >微信：{{dialogItem.wechat}}
+            >微信：{{dialogItem.wechat_id}}
             <view
               bind:tap="onWechatTap"
               data-item="{{item}}"

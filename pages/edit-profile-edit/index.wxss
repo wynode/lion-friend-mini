@@ -20,14 +20,24 @@ page {
   color: #999;
 }
 
+/* 底部按钮样式 */
 .footer {
   position: fixed;
-  bottom: 40rpx;
+  bottom: 90rpx;
   left: 20rpx;
   right: 20rpx;
 }
 
+.t-button {
+  border-radius: 8rpx;
+}
+
 .footer .t-button {
-  margin-top: 120rpx;
-  margin-left: 200rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  --td-button-primary-color: #000000;
+  --td-button-primary-bg-color: #ffc82f;
+  --td-button-primary-border-color: #ffc82f;
+  --td-button-primary-active-bg-color: #ffd34e;
+  --td-button-primary-active-border-color: #ffd34e;
 }

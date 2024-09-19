@@ -1,0 +1,39 @@
+<view class="map-container">
+  <map
+    id="myMap"
+    style="width: 100vw; height: 100vh"
+    latitude="{{latitude}}"
+    longitude="{{longitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    circles="{{circles}}"
+    bindtap="handleMarketTap"
+    bindregionchange="onRegionChange"
+    show-location
+  ></map>
+
+  <view class="search-bar">
+    <input
+      type="text"
+      placeholder="搜索地点"
+      bindinput="onSearchInput"
+    />
+  </view>
+  <view class="my-bottom">
+    <view class="radius-buttons">
+      <view
+        wx:for="{{radiusOptions}}"
+        wx:key="index"
+        class="my-btn"
+        bindtap="setRadius"
+        data-radius="{{item}}"
+        >{{item}}km</view
+      >
+    </view>
+    <view
+      class="search-button"
+      bindtap="searchArea"
+      >搜索区域</view
+    >
+  </view>
+</view>

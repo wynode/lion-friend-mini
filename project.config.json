@@ -46,7 +46,7 @@
     "useStaticServer": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.23.1",
+  "libVersion": "3.5.6",
   "appid": "wxaeedc68a6e32f685",
   "projectname": "loin-friend-mini",
   "simulatorType": "wechat",

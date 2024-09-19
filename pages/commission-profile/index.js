@@ -19,7 +19,7 @@ Page({
 
   async handleInitPage() {
     const myId = wx.getStorageSync('myId');
-    app.request(`/wallet/score_point/?ext_user=${myId.ext_user_id}`).then((res) => {
+    app.request(`/wallet/commission/?ext_user=${myId.ext_user_id}`).then((res) => {
       console.log(res);
       console.log(res.results.filter((item) => item.record_type === 1));
       this.setData({

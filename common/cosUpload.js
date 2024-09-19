@@ -12,11 +12,10 @@ const cos = new COS({
       callback({
         TmpSecretId: credentials.tmpSecretId,
         TmpSecretKey: credentials.tmpSecretKey,
-        // v1.2.0之前版本的 SDK 使用 XCosSecurityToken 而不是 SecurityToken
         SecurityToken: credentials.sessionToken,
         // 建议返回服务器时间作为签名的开始时间，避免用户浏览器本地时间偏差过大导致签名错误
         StartTime: result.startTime, // 时间戳，单位秒，如：1580000000
-        ExpiredTime: result.expiredTime, // 时间戳，单位秒，如：1580000900
+        ExpiredTime: result.expiredTime, // 时间戳，单位秒，如：1580000000
       });
     });
   },
@@ -26,12 +25,12 @@ function handleFileInUpload(fileName, filePath) {
   return new Promise((resolve, reject) => {
     cos.uploadFile(
       {
-        Bucket: 'lezhongda-1327503373' /* 填写自己的 bucket，必须字段 */,
-        Region: 'ap-singapore' /* 存储桶所在地域，必须字段 */,
+        Bucket: 'shichengyouyou-1328810969',
+        Region: 'ap-singapore',
         Key: fileName /* 存储在桶里的对象键（例如:1.jpg，a/b/test.txt，图片.jpg）支持中文，必须字段 */,
         FilePath: filePath /* 上传文件路径，必须字段 */,
         SliceSize:
-          1024 * 1024 * 5 /* 触发分块上传的阈值，超过5MB使用分块上传，小于5MB使用简单上传。可自行设置，非必须 */,
+          1024 * 1024 * 500 /* 触发分块上传的阈值，超过5MB使用分块上传，小于5MB使用简单上传。可自行设置，非必须 */,
         onProgress: function (progressData) {
           console.log(JSON.stringify(progressData));
         },
@@ -41,10 +40,10 @@ function handleFileInUpload(fileName, filePath) {
           reject(err);
         } else {
           const newUrl = `https://${data.Location.replace(
-            'lezhongda-1327503373.cos.ap-singapore.myqcloud.com',
-            'cdn.lzdss.sg',
+            'shichengyouyou-1328810969.cos.ap-singapore.myqcloud.com',
+            'cdn.shichengyouyou.com',
           )}`;
-          console.log('上传成功');
+          console.log('上传成功', newUrl);
           resolve(newUrl);
         }
       },

@@ -34,19 +34,19 @@ App({
       customeHeader.Authorization = `Bearer ${token}`;
     }
     return new Promise((resolve, reject) => {
-      wx.showLoading();
+      // wx.showLoading();
       wx.request({
-        url: `https://lion-api.lzdss.sg${url}`,
+        url: `https://api.shichengyouyou.com${url}`,
         method,
         data,
         header: customeHeader,
         success(res) {
-          wx.hideLoading();
+          // wx.hideLoading();
           // 请求成功处理
           if (res.statusCode === 401) {
             wx.showToast({
               icon: 'none',
-              title: `未获取到用户登录信息，请重新登录`,
+              title: `未获取到用户登录信息，请登录`,
             });
             reject(res);
             setTimeout(() => {
@@ -76,7 +76,7 @@ App({
         },
         fail(err) {
           // 请求失败处理
-          wx.hideLoading();
+          // wx.hideLoading();
           // that.userLogin()
           console.log(err);
           console.log(`https://api.liliantech.com${url}`, '这个是请求的url');

@@ -25,6 +25,7 @@ page {
 }
 
 .username {
+  margin-left: 10rpx;
   font-size: 24rpx;
   color: #353535;
 }
@@ -36,12 +37,53 @@ page {
 }
 
 .top-right {
-  font-size: 8rpx;
+  font-size: 20rpx;
   color: #353535;
+
+  /* height: 100%;
+  display: flex;
+  align-items: center; */
+}
+
+.top-right-icon {
+  height: 30rpx;
+  width: 30rpx;
+}
+
+.bottom-left {
+  width: 300rpx;
+  height: 48rpx;
+  border-radius: 180rpx;
+  opacity: 1;
+  font-size: 20rpx;
+  font-weight: normal;
+  color: #b3b3b3;
+  padding-left: 18rpx;
+  padding-top: 4rpx;
+  box-sizing: border-box;
+  border: 1.5px solid rgba(179, 179, 179, 0.25);
+}
+
+.bottom-right {
+  display: flex;
 }
 
 .banner {
   height: 640rpx;
+  z-index: -1;
+  --td-swiper-radius: 0rpx;
+}
+
+/* .banner {
+  width: 100%;
+  height: 640rpx;
+} */
+
+.banner image,
+.banner video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .banner-image {
@@ -58,6 +100,10 @@ page {
   font-size: 32rpx;
   font-weight: 500;
   color: #000000;
+}
+
+.c-right {
+  flex-grow: 1;
 }
 
 .desc {
@@ -134,6 +180,18 @@ page {
   margin: 6rpx 0;
 }
 
+.c-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.c-reply {
+  font-size: 20rpx;
+  font-weight: normal;
+  color: #969696;
+}
+
 .c-ip-time {
   font-size: 20rpx;
   font-weight: normal;
@@ -172,20 +230,28 @@ page {
   display: flex;
   justify-content: center;
   margin: 56rpx;
+  padding-bottom: 40rpx;
 }
 
 .bottom {
-  height: 124rpx;
+  position: fixed;
+  box-sizing: border-box;
+  bottom: 0;
+  width: 100%;
+  /* height: 124rpx; */
   opacity: 1;
   background-color: #fff;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding-right: 72rpx;
+  padding-top: 48rpx;
+  padding-left: 72rpx;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 40rpx);
 }
 
 .b-item {
-  margin-left: 28rpx;
+  margin-left: 30rpx;
   display: flex;
   align-items: center;
 }

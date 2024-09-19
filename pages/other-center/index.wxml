@@ -15,7 +15,7 @@
             <view class="mcihl-info-item">IP属地：{{userInfo.address_from_ip}}</view>
           </view>
         </view>
-        <view class="mci-header-right">
+        <!-- <view class="mci-header-right">
           <view
             class="mcihr-item"
             bind:tap="handleGoEdit"
@@ -36,7 +36,7 @@
             ></t-image>
             <view class="mcihr-item-title"> 设置</view>
           </view>
-        </view>
+        </view> -->
       </view>
       <view class="mci-desc"> {{ userInfo.profile }} </view>
       <view class="mci-statis">

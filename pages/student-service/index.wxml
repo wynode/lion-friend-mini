@@ -7,12 +7,12 @@
     >
       <t-image
         class="item-left"
-        src="{{item.image}}"
+        src="{{item.image_url}}"
         shape="round"
       />
       <view class="item-right">
         <view>
-          <view class="item-title">{{item.title}}</view>
+          <view class="item-title">{{item.name}}</view>
 
           <view class="item-desc">{{item.description}}</view>
         </view>

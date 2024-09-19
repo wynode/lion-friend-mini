@@ -1,11 +1,15 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/my-map/index",
+    "pages/login/index",
     "pages/house-profile/index",
     "pages/house-filter/index",
     "pages/house-points/index",
     "pages/my-center/index",
+    "pages/other-center/index",
     "pages/integral-profile/index",
+    "pages/commission-profile/index",
     "pages/edit-profile/index",
     "pages/edit-profile-edit/index",
     "pages/setting-profile/index",
@@ -17,7 +21,6 @@
     "pages/publish/index",
     "pages/publish-article/index",
 
-    "pages/login/index",
     "pages/register/index",
     "pages/video-list/index",
     "pages/video-play/index"
@@ -55,9 +58,7 @@
       }
     ]
   },
-  "requiredPrivateInfos": [
-    "chooseAddress"
-  ],
+  "requiredPrivateInfos": ["chooseAddress"],
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {},
   "window": {
@@ -70,6 +71,12 @@
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    },
+    "scope.userInfo": {
+      "desc": "你的用户信息将用于小程序功能"
+    },
+    "scope.writePhotosAlbum": {
+      "desc": "你的相册信息将用于保存分享图片"
     }
   }
 }

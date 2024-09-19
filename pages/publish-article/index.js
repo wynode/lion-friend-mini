@@ -31,26 +31,42 @@ Page({
     const { fileList } = this.data;
     const { files } = e.detail;
     try {
-      const compressResult = await wx.compressImage({
-        src: files[0].url, // 图片路径
-        quality: 50, // 压缩质量
-      });
-      const res = await handleFileInUpload(files[0].name, compressResult.tempFilePath);
+      const file = files[0];
+      let uploadResult;
+      wx.showLoading();
+
+      if (file.type === 'video') {
+        // 处理视频文件
+        uploadResult = await handleFileInUpload(file.name, file.url);
+      } else if (file.type === 'image') {
+        // 处理图片文件
+        const compressResult = await wx.compressImage({
+          src: file.url,
+          quality: 50,
+        });
+        uploadResult = await handleFileInUpload(file.name, compressResult.tempFilePath);
+      } else {
+        throw new Error('Unsupported file type');
+      }
+
       const newFileList = [
         ...fileList,
         {
-          url: res,
-          name: files[0].name,
-          type: 'image',
+          url: uploadResult,
+          name: file.name,
+          type: file.type,
         },
       ];
       this.setData({
         fileList: newFileList,
       });
-    } catch {
+      wx.hideLoading();
+    } catch (error) {
+      wx.hideLoading();
+      console.error('Upload error:', error);
       wx.showToast({
         icon: 'error',
-        title: '上传图片出错，请联系管理员',
+        title: '上传出错，请联系管理员',
       });
     }
   },
@@ -89,6 +105,7 @@ Page({
 
   async handlePublish() {
     try {
+      wx.showLoading();
       await app.request('/community/articles/', 'POST', {
         title: this.data.title,
         content: this.data.content,
@@ -100,9 +117,11 @@ Page({
         title: '发布成功',
       });
       wx.switchTab({
-        url: '/pages/my-center/index',
+        url: '/pages/friend-community/index',
       });
+      wx.hideLoading();
     } catch (error) {
+      wx.hideLoading();
       wx.showToast({
         icon: 'error',
         title: '发布文章出错，请联系管理员',
