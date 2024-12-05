@@ -56,6 +56,7 @@
     <view class="my-center-detail">
       <t-tabs
         defaultValue="{{0}}"
+        value="{{value}}"
         bind:change="onTabsChange"
         t-class="custom-tabs"
         t-class-content="custom-panel"
@@ -82,7 +83,7 @@
                 bindtap="switchTab"
                 data-index="0"
               >
-                房源 {{houseList.length}}
+                文章 {{ articleList.length }}
                 <t-icon
                   wx:if="{{currentTab === 0}}"
                   name="chevron-down"
@@ -93,7 +94,7 @@
                 bindtap="switchTab"
                 data-index="1"
               >
-                文章 {{ articleList.length }}
+                房源 {{houseList.length}}
                 <t-icon
                   wx:if="{{currentTab === 1}}"
                   name="chevron-down"
@@ -114,7 +115,7 @@
           </view>
           <view
             class="home-house-container"
-            wx:if="{{currentTab === 0}}"
+            wx:if="{{currentTab === 1}}"
           >
             <view wx:if="{{houseList.length}}">
               <house-list houseList="{{houseList}}"></house-list>
@@ -130,7 +131,7 @@
 
           <view
             class="home-house-container"
-            wx:if="{{currentTab === 1}}"
+            wx:if="{{currentTab === 0}}"
           >
             <view wx:if="{{articleList.length}}">
               <article-list articleList="{{articleList}}"></article-list>

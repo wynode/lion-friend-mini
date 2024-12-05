@@ -10,28 +10,46 @@ Page({
   onShow(options) {
     console.log(options);
     this.getTabBar().init();
-    this.loadArticleList();
+
   },
 
   // 上拉触底事件
   onReachBottom() {
     console.log(this.data.hasMore, '---');
     if (this.data.hasMore) {
-      this.loadArticleList();
+      this.loadArticleList(true);
     }
   },
 
   onLoad() {
     // this.loadArticleList();
+    this.loadArticleList();
   },
 
   // 加载房源列表
-  async loadArticleList() {
+  async otherLoadArticleList() {
+    wx.showLoading();
+    const res = await app.request('/community/articles/', 'GET', {
+      page: 1,
+      page_size: this.data.pageSize,
+    });
+    wx.hideLoading();
+    const newArticleList = res.results; // 假设 API 返回的数据结构
+
+    this.setData({
+      articleList: newArticleList,
+      pageNum: 2,
+      hasMore: newArticleList.length === 10,
+    });
+  },
+
+  // 加载房源列表
+  async loadArticleList(isReach) {
     if (!this.data.hasMore) return;
     // 这里替换为你的实际 API 调用
     wx.showLoading();
     const res = await app.request('/community/articles/', 'GET', {
-      page: this.data.pageNum,
+      page: isReach ? this.data.pageNum : 1,
       page_size: this.data.pageSize,
       // ... 其他可能的参数
     });
@@ -39,7 +57,7 @@ Page({
     const newArticleList = res.results; // 假设 API 返回的数据结构
 
     this.setData({
-      articleList: [...this.data.articleList, ...newArticleList],
+      articleList: isReach ? [...this.data.articleList, ...newArticleList] : newArticleList,
       pageNum: this.data.pageNum + 1,
       hasMore: newArticleList.length === this.data.pageSize,
     });

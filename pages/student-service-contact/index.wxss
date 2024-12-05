@@ -14,6 +14,21 @@ page {
   padding-top: 40rpx;
 }
 
+.item-symbol {
+  font-size: 20rpx;
+  margin-right: 10rpx;
+  font-weight: normal;
+}
+
+.item-price {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 30rpx;
+  height: 48rpx;
+  margin-top: 40rpx;
+}
+
 .item {
   width: 684rpx;
   border-radius: 18rpx;
@@ -22,7 +37,6 @@ page {
   display: flex;
   padding: 46rpx 34rpx;
   box-sizing: border-box;
-  align-items: center;
   margin: 0 auto;
   margin-bottom: 46rpx;
 }
@@ -50,7 +64,6 @@ page {
   display: flex;
   align-items: flex-end;
   flex-shrink: 0;
-  min-width: 120rpx;
 }
 
 .item-title {
@@ -137,4 +150,119 @@ page {
 
 .dialog-close-box {
   margin: 0 auto;
+}
+
+.popup-header {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 40rpx;
+}
+
+.popup-title {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.t-popup .t-input {
+  background: #f7f8fa;
+  padding: 18rpx 32rpx;
+}
+
+.t-popup .t-input::after {
+  display: none;
+}
+
+.t-input .t-input--left {
+  font-size: 26rpx;
+  padding-left: 24rpx;
+}
+
+.t-popup .label {
+  font-size: 26rpx;
+}
+
+.t-input .t-input__wrap .t-input__content {
+  background: #ffffff;
+  width: 422rpx;
+  height: 42rpx;
+}
+
+.t-radio-group {
+  --td-radio-icon-checked-color: #ffc82f;
+  --td-radio-font-size: 26rpx;
+  --td-radio-icon-size: 28rpx;
+  display: flex;
+  align-items: center;
+  background: #f7f8fa;
+}
+
+.t-radio-group .t-radio {
+  background: #f7f8fa;
+  display: flex;
+  align-items: center;
+  padding: 24rpx 32rpx;
+}
+
+.t-input__label {
+  font-size: 26rpx !important;
+}
+
+.popup-content {
+  margin-bottom: 20px;
+}
+
+.gender-selector {
+  display: flex;
+  align-items: center;
+  /* margin: 10px 0; */
+}
+
+.gender-selector .label {
+  margin-left: 16px;
+}
+
+.popup-footer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40rpx;
+}
+
+.t-button {
+  flex: 1;
+  margin: 0 10px;
+  width: 230px;
+  height: 60px;
+  border-radius: 12px;
+  opacity: 1;
+
+  background: #ffffff;
+}
+
+.btn-left {
+  width: 230rpx;
+  height: 60rpx;
+  border-radius: 12rpx;
+  opacity: 1;
+  background: #ffffff;
+  font-size: 26rpx;
+  font-weight: normal;
+  color: #cdcdcd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-right {
+  width: 230rpx;
+  height: 60rpx;
+  border-radius: 12rpx;
+  opacity: 1;
+
+  background: #ffc82f;
+  font-size: 26rpx;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 32rpx;
 }

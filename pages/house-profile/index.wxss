@@ -53,6 +53,12 @@ page {
   --td-swiper-radius: 0rpx;
 }
 
+.hid-info {
+  font-size: 18rpx;
+  color: #3d3d3d;
+  margin-bottom: 20rpx;
+}
+
 .house-info {
   width: 684rpx;
   border-radius: 18rpx;

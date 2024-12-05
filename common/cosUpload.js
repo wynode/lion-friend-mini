@@ -41,7 +41,7 @@ function handleFileInUpload(fileName, filePath) {
         } else {
           const newUrl = `https://${data.Location.replace(
             'shichengyouyou-1328810969.cos.ap-singapore.myqcloud.com',
-            'cdn.shichengyouyou.com',
+            'cdn.shichengyy.com',
           )}`;
           console.log('上传成功', newUrl);
           resolve(newUrl);

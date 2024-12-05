@@ -42,7 +42,7 @@ Page({
   },
 
   async handleInitPage() {
-    const res = await app.request(`/student_service/type/`);
+    const res = await app.request(`/student_service/type/`, 'GET', { page_size: 100 });
     console.log(res);
     this.setData({ services: res.results });
   },

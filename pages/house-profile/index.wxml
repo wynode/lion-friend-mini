@@ -27,7 +27,7 @@
         duration="{{duration}}"
         interval="{{interval}}"
         navigation="{{ { type:  'dots-bar' } }}"
-        list="{{houseInfo.images}}"
+        list="{{houseInfo.images || []}}"
         height="650rpx"
         bind:click="handleImageClick"
       >
@@ -38,7 +38,7 @@
       <view class="hi-details">
         <view
           class="hi-details-item"
-          wx:for="{{houseInfo.details}}"
+          wx:for="{{houseInfo.details || []}}"
           wx:key="index"
         >
           <view class="hid-item-value">
@@ -54,6 +54,7 @@
         </view>
       </view>
 
+      <view class="hid-info" wx:if="{{houseInfo.min_of_months}}"> * 其他月份短租详情请咨询客服</view>
       <t-divider style="margin: 0" />
 
       <view class="hi-content">
@@ -100,7 +101,10 @@
       </view>
     </view>
 
-    <view class="house-up" bind:tap="handleGoOtherProfile">
+    <view
+      class="house-up"
+      bind:tap="handleGoOtherProfile"
+    >
       <view class="hu-title"> TA的主页 </view>
       <view class="hu-header">
         <t-image

@@ -16,14 +16,13 @@
     "pages/article-profile/index",
     "pages/student-service/index",
     "pages/student-service-profile/index",
+    "pages/student-service-contact/index",
     "pages/friend-community/index",
     "pages/friend-chat/index",
     "pages/publish/index",
     "pages/publish-article/index",
 
-    "pages/register/index",
-    "pages/video-list/index",
-    "pages/video-play/index"
+    "pages/register/index"
   ],
   "tabBar": {
     "custom": true,
@@ -37,16 +36,12 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/video-list/index",
-        "text": "视频课程"
-      },
-      {
         "pagePath": "pages/friend-community/index",
         "text": "友友社区"
       },
       {
         "pagePath": "pages/friend-chat/index",
-        "text": "友友群聊"
+        "text": "友友活动"
       },
       {
         "pagePath": "pages/publish/index",
@@ -58,7 +53,7 @@
       }
     ]
   },
-  "requiredPrivateInfos": ["chooseAddress"],
+  "requiredPrivateInfos": ["chooseAddress", "chooseLocation"],
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {},
   "window": {

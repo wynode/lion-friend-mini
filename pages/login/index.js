@@ -22,7 +22,15 @@ Page({
     // this.getUserProfile();
   },
 
+  isImageUrl(url) {
+    const imageExtensions = /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i;
+    return imageExtensions.test(url);
+  },
+
   async handleLogin() {
+    if (!this.data.phoneNumber || !this.data.userInfo.nickName) {
+      return
+    }
     wx.login({
       success: async (res) => {
         try {
@@ -37,10 +45,19 @@ Page({
           if (loginRes.access) {
             wx.setStorageSync('access', loginRes.access);
             const myId = await app.request('/my_user_id/', 'GET');
-            const tempFilePath = this.data.userInfo.avatarUrl;
-            const url = await handleFileInUpload(tempFilePath.slice(-18), tempFilePath);
-            await app.request(`/ext_user/${myId.ext_user_id}/`, 'PATCH', {
-              avatar_url: url,
+            if (this.data.userInfo.avatarUrl && this.isImageUrl(this.data.userInfo.avatarUrl)) {
+              const tempFilePath = this.data.userInfo.avatarUrl;
+              const url = await handleFileInUpload(tempFilePath.slice(-18), tempFilePath);
+              await app.request(`/ext_user/${myId.ext_user_id}/`, 'PATCH', {
+                avatar_url: url,
+              });
+            }
+
+            await app.request('/wallet/auto_compute/', 'POST', {
+              // order_id: res.id,
+              // parent: this.data.parent,
+              // second_parent: this.data.second_parent,
+              action: 'login',
             });
             const isProfile = wx.getStorageSync('isProfile');
             if (isProfile) {
@@ -99,7 +116,7 @@ Page({
   handleGoAgreement() {
     wx.openEmbeddedMiniProgram({
       appId: 'wxd45c635d754dbf59',
-      path: `pages/detail/detail?url=https://docs.qq.com/doc/DWVh6VlNFa2ZvZUNX`,
+      path: `pages/detail/detail?url=https://docs.qq.com/doc/DQlBaYkl3dUNQVnVj`,
     });
   },
 

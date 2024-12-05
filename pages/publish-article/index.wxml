@@ -34,7 +34,7 @@
 
       <view class="textarea">
         <t-textarea
-          placeholder="填写征文，最多100个字个性签名介绍，最多100个字个性签名介绍，最多100个字个性签名介绍，最多100个字个性签名介绍最多100个字个性签名介绍。"
+          placeholder="填写正文。"
           value="{{content}}"
           bind:change="onContentChange"
           placeholderStyle="color: #979797;font-size: 26rpx;font-weight: normal"

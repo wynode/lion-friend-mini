@@ -5,6 +5,17 @@
   height: calc(100vh - 150rpx);
 }
 
+.t-dialog .t-button {
+  color: black;
+}
+
+/* 如果需要自定义退出按钮样式 */
+.t-dialog .logout-btn {
+  margin-top: 48rpx;
+  color: #E34D59;
+}
+
+
 .t-cell-group {
   margin-bottom: 20rpx;
   border-radius: 16rpx;

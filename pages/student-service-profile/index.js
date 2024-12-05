@@ -18,8 +18,13 @@ Page({
   },
 
   async handleInitPage(id) {
-    const res = await app.request(`/student_service/?service_type=${id}`);
+    const res = await app.request(`/student_service/?service_type=${id}`,  'GET', { page_size: 100 });
     console.log(res);
+    if (res.results && res.results[0]) {
+      wx.setNavigationBarTitle({
+        title: res.results[0].service_type_display
+      });
+    }
     this.setData({
       services: res.results,
     });
@@ -27,14 +32,17 @@ Page({
 
   onConnectTap(e) {
     const service = e.currentTarget.dataset.service;
+    wx.navigateTo({
+      url: `/pages/student-service-contact/index?id=${service.id}`,
+    })
     console.log('Service tapped:', service);
-    this.setData({
-      dialogItem: {
-        mobile: service.mobile,
-        wechat_id: service.wechat_id
-      },
-      showDialog: true,
-    });
+    // this.setData({
+    //   dialogItem: {
+    //     mobile: service.mobile,
+    //     wechat_id: service.wechat_id
+    //   },
+    //   showDialog: true,
+    // });
   },
   onPhoneTap() {
     wx.setClipboardData({

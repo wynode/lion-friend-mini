@@ -36,6 +36,14 @@ const houseTypeFilter = {
     { value: 2, label: '合租' },
   ],
 };
+const houseGenderFilter = {
+  value: '1,2',
+  options: [
+    { value: '1,2', label: '不限' },
+    { value: '1', label: '男' },
+    { value: '2', label: '女' },
+  ],
+};
 const propertyTypeFilter = {
   value: 'no',
   options: [
@@ -85,9 +93,9 @@ const sorterFilter = {
   ],
 };
 const positionFilter = {
-  value: 0,
+  value: '1,2,3,4,5',
   options: [
-    { value: 0, label: '不限' },
+    { value: '1,2,3,4,5', label: '不限' },
     { value: 1, label: '东部' },
     { value: 2, label: '西部' },
     { value: 3, label: '南部' },
@@ -112,6 +120,7 @@ Page({
     priceFilter,
     sorterFilter,
     houseTypeFilter,
+    houseGenderFilter,
     propertyTypeFilter,
     roomFacilityFilter,
     positionFilter,
@@ -122,6 +131,7 @@ Page({
       ganPrice: [0, 5000],
       region: [],
       rental_type: [],
+      gender: [],
       property_type: [],
       room_facility: [],
     },
@@ -189,6 +199,9 @@ Page({
     if (filter.rental_type.length) {
       params.rental_type = filter.rental_type.join(',');
     }
+    if (filter.gender.length) {
+      params.gender = filter.gender.join(',');
+    }
     if (filter.property_type.length) {
       params.property_type = filter.property_type.join(',');
     }
@@ -196,7 +209,7 @@ Page({
       params.room_facility = filter.room_facility.join(',');
     }
     if (filter.title) {
-      params.title = filter.title;
+      params.search = filter.title;
     }
 
     const queryString = objectToQueryString(params);
@@ -215,7 +228,7 @@ Page({
 
     this.setData({
       houseList: isReach ? [...this.data.houseList, ...newHouseList] : newHouseList,
-      pageNum: this.data.pageNum + 1,
+      pageNum: isReach ? this.data.pageNum + 1 : 1,
       hasMore: newHouseList.length === this.data.pageSize,
     });
   },
@@ -261,6 +274,24 @@ Page({
 
     this.setData({
       'filter.rental_type': newRentalTypes,
+    });
+  },
+
+  handleFilterGenderTap(e) {
+    const { item } = e.currentTarget.dataset;
+    const currentGender = this.data.filter.gender || [];
+    let newGenderType;
+
+    if (currentGender.includes(item.value)) {
+      // 如果已经选中，则移除
+      newGenderType = currentGender.filter((type) => type !== item.value);
+    } else {
+      // 如果未选中，则添加
+      newGenderType = [...currentGender, item.value];
+    }
+
+    this.setData({
+      'filter.gender': newGenderType,
     });
   },
 

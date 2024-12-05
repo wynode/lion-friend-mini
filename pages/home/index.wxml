@@ -44,7 +44,7 @@
     ></t-notice-bar>
   </view>
 
-  <house-list houseList="{{houseList}}"></house-list>
+  <house-list houseList="{{houseList}}" isJingxuan="true"></house-list>
 
   <view wx:if="{{houseList.length}}">
     <view

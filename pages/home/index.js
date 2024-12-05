@@ -45,6 +45,22 @@ Page({
     content: ['用户东成西就成功预定房源！', '用户南帝北丐成功预定房源！', '用户独孤求败成功预定房源！'],
   },
 
+  onShareAppMessage() {
+    return {
+      title: '新加坡本地华人社交平台，分享租房、求学、生活经验',
+      path: '/pages/home/index',
+      // imageUrl: '/path/to/your/share-image.png'  // 可选，自定义转发的图片
+    };
+  },
+
+  onShareTimeline() {
+    return {
+      title: '新加坡本地华人社交平台，分享租房、求学、生活经验',
+      // query: ``,
+      // imageUrl: '/path/to/your/share-image.png'  // 可选，自定义转发的图片
+    };
+  },
+
   onShow() {
     this.getTabBar().init();
   },
@@ -76,6 +92,7 @@ Page({
     const res = await app.request('/curated_shared_rental/', 'GET', {
       page: this.data.pageNum,
       page_size: this.data.pageSize,
+      
       // ... 其他可能的参数
     });
     wx.hideLoading();

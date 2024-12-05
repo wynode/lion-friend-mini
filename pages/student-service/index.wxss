@@ -16,7 +16,7 @@ page {
 
 .item {
   width: 684rpx;
-  height: 294rpx;
+  /* height: 294rpx; */
   border-radius: 18rpx;
   opacity: 1;
   background: #ffffff;
@@ -24,6 +24,7 @@ page {
   padding: 46rpx 34rpx;
   box-sizing: border-box;
   margin: 0 auto;
+  align-items: center;
   margin-bottom: 46rpx;
 }
 
@@ -40,6 +41,8 @@ page {
 .item-right {
   display: flex;
   flex-direction: column;
+  align-self: stretch;
+  /* justify-content: space-between; */
   justify-content: space-between;
   flex-grow: 1;
 }
@@ -63,6 +66,7 @@ page {
   width: 125rpx;
   height: 53rpx;
   display: flex;
+  margin-top: 10rpx;
   align-items: center;
   justify-content: center;
   background: #ffc82f;

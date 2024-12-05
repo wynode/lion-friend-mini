@@ -19,7 +19,7 @@ export default [
     selectedIconPath: '/assets/images/tabbar/publish-select.svg',
   },
   {
-    text: '群聊',
+    text: '活动',
     url: 'pages/friend-chat/index',
     iconPath: '/assets/images/tabbar/chat.svg',
     selectedIconPath: '/assets/images/tabbar/chat-select.svg',

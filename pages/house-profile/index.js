@@ -22,50 +22,62 @@ const facilityImageMap = {
 
 // 转换函数
 function convertToFacilities(roomFacilities) {
-  return roomFacilities.map((facility) => ({
-    image: facilityImageMap[facility] || '/assets/images/house/default.svg', // 使用默认图片如果没有匹配
+  let rooms = roomFacilities;
+  if (Array.isArray(roomFacilities)) {
+    rooms = roomFacilities;
+  } else {
+    rooms = roomFacilities.split(',');
+  }
+  return rooms.map((facility) => ({
+    image: facilityImageMap[facility] || '/assets/images/house/xyj.svg', // 使用默认图片如果没有匹配
     name: facility,
   }));
 }
 
-function extractDetails(houseData) {
+function extractDetails(houseData, houseType) {
   const details = [
     {
       label: '月租',
-      value: `${houseData.price}/月`,
+      value: `${houseData?.price}/月`,
     },
     {
       label: '出租方式',
-      value: houseData.rental_type_cn,
+      value: houseData?.rental_type_cn,
     },
     {
       label: '房间类型',
-      value: houseData.room_type_cn,
+      value: houseData?.room_type_cn,
     },
     {
       label: '入住时间',
-      value: houseData.check_in_date.slice(-5),
+      value: houseData?.check_in_date?.slice(-5),
     },
     {
       label: '面积',
-      value: `${houseData.area}㎡`,
+      value: `${houseData?.area}㎡`,
     },
 
     {
       label: '性质',
-      value: houseData.property_type_cn,
+      value: houseData?.property_type_cn,
     },
     {
       label: '楼层',
-      value: `${houseData.floor}层`,
+      value: `${houseData?.floor}层`,
     },
     {
-      label: '最短租期',
-      value: `${houseData.min_of_months}个月`,
+      label: '租期',
+      value: `${houseData?.min_of_months}个月`,
     },
   ];
-
   // 过滤掉值为空或未知的项
+  if (houseType === 'host_family') {
+    details.push({
+      label: '可住性别',
+      value: houseData?.gender_cn,
+    });
+  }
+
   return details.filter((item) => item.value && item.value !== '未知' && item.value !== '0层');
 }
 
@@ -105,32 +117,32 @@ Page({
       details: [
         {
           label: '月租',
-          value: '1500/月',
+          value: '',
         },
         {
           label: '出租方式',
-          value: '合租',
+          value: '',
         },
         {
           label: '房间类型',
-          value: '主人房',
+          value: '',
         },
         {
           label: '入住时间',
-          value: '随时入住',
+          value: '',
         },
         {
           label: '面积',
-          value: '38.5',
+          value: '',
         },
         {
           label: '性质',
-          value: '公寓',
+          value: '',
         },
       ],
 
-      title: '近NTU南阳理工大学~别墅多间主人房',
-      desc: '近NTU南阳理工大学～1.2公里…做199只要2个站到学校…199南阳理工大学转一圈出来…还是到我们附近有一个主人房转租一个月！ 想租的请联系我 因本人毕业回国…将现住的别墅主人房短租6.15日～7.18日止33天～一个月1200$…包水电网按天一天60$…高级别墅～环境一流～泳池➕健身房都有…特别安静还可以长租…第一个月还是优惠2+1主人房～可以住2个人…2个人的独立洗手间…独立房间～',
+      title: '',
+      desc: '',
       is_like: true,
       is_collect: false,
     },
@@ -158,6 +170,7 @@ Page({
       parent: this.data.extUserId,
       second_parent: this.data.parent,
     };
+    this.shareAddScore();
     return {
       title: '快来看！我在星辉租房发现一套非常棒的房源！',
       path: `/pages/house-profile/index?id=${this.data.houseInfo.id}&type=${this.data.houstType}&parent=${comData.parent}&second_parent=${comData.second_parent}`,
@@ -175,6 +188,16 @@ Page({
       query: `id=${this.data.houseInfo.id}&type=${this.data.houstType}&parent=${comData.parent}&second_parent=${comData.second_parent}`,
       // imageUrl: '/path/to/your/share-image.png'  // 可选，自定义转发的图片
     };
+  },
+
+  async shareAddScore() {
+    await app.request('/wallet/auto_compute/', 'POST', {
+      // article_id: this.data.houseInfo.id,
+      // parent: this.data.parent,
+      // second_parent: this.data.second_parent,
+      // [`${this.data.houstType}_id`]: this.data.houseInfo.id,
+      action: 'share_app',
+    });
   },
 
   handleImageClick(e) {
@@ -199,16 +222,16 @@ Page({
       wx.showLoading();
       const { id, type, parent, second_parent = '' } = options || {};
       console.log(id, type, parent, second_parent);
-      const token = wx.getStorageSync('access');
-      if (!token) {
-        wx.setStorageSync('isProfile', true);
-        wx.navigateTo({
-          url: '/pages/login/index',
-        });
-      }
+      // const token = wx.getStorageSync('access');
+      // if (!token) {
+      //   wx.setStorageSync('isProfile', true);
+      //   wx.navigateTo({
+      //     url: '/pages/login/index',
+      //   });
+      // }
       const myId = await app.request('/my_user_id/', 'GET');
       this.setData({
-        extUserId: myId.ext_user_id,
+        extUserId: myId?.ext_user_id,
       });
       if (parent) {
         const payload = {
@@ -232,19 +255,20 @@ Page({
         res = await app.request(`/shared_rental/${id}/`);
       }
       wx.hideLoading();
+
       this.setData({
         houseInfo: {
           ...res,
-          facilities: convertToFacilities(res.room_facility),
-          details: extractDetails(res),
-          is_like: res.is_current_like,
-          is_collect: res.is_current_favorite,
+          facilities: convertToFacilities(res?.room_facility || []),
+          details: extractDetails(res, type),
+          is_like: res?.is_current_like,
+          is_collect: res?.is_current_favorite,
         },
         markers: [
           {
             id: 1,
-            longitude: res.location.lng || this.data.longitude,
-            latitude: res.location.lat || this.data.latitude,
+            longitude: res?.location?.lng || this.data.longitude,
+            latitude: res?.location?.lat || this.data.latitude,
             iconPath: '/assets/images/house/mark.svg',
             joinCluster: true,
             width: 40,
@@ -254,8 +278,8 @@ Page({
         userInfo: {
           ...res.deployer_data,
           tags: [
-            `房源${res.deployer_data.host_family_count + res.deployer_data.shared_rental_count}`,
-            `文章${res.deployer_data.student_service_count}`,
+            `房源${res?.deployer_data?.host_family_count + res?.deployer_data?.shared_rental_count}`,
+            `文章${res?.deployer_data?.article_count}`,
           ],
         },
       });
@@ -377,14 +401,16 @@ Page({
         holder_age: this.data.formData.age,
         holder_mobile: this.data.formData.phone,
         [this.data.houstType]: this.data.houseInfo.id,
+        parent_ext_user: this.data.parent,
+        second_parent_ext_user: this.data.second_parent,
       });
-      await app.request('/wallet/auto_compute/', 'POST', {
-        order_id: res.id,
-        parent: this.data.parent,
-        second_parent: this.data.second_parent,
-        action: 'order',
-        [`${this.data.houstType}_id`]: this.data.houseInfo.id,
-      });
+      // await app.request('/wallet/auto_compute/', 'POST', {
+      //   // order_id: res.id,
+      //   parent: this.data.parent,
+      //   second_parent: this.data.second_parent,
+      //   action: 'order',
+      //   [`${this.data.houstType}_order_id`]: res.id,
+      // });
       wx.showToast({
         title: '提交成功',
       });

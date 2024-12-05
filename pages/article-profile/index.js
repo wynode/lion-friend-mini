@@ -14,6 +14,7 @@ Page({
   },
 
   onShareAppMessage() {
+    this.shareAddScore();
     return {
       title: '快来看！我在星辉租房发现一套非常棒的文章！',
       path: `/pages/artilcle-profile/index?id=${this.data.id}`,
@@ -27,6 +28,16 @@ Page({
       query: `id=${this.data.id}`,
       // imageUrl: '/path/to/your/share-image.png'  // 可选，自定义转发的图片
     };
+  },
+
+  async shareAddScore() {
+    await app.request('/wallet/auto_compute/', 'POST', {
+      // article_id: this.data.houseInfo.id,
+      // parent: this.data.parent,
+      // second_parent: this.data.second_parent,
+      // [`${this.data.houstType}_id`]: this.data.houseInfo.id,
+      action: 'share_app',
+    });
   },
 
   onShow(options) {

@@ -1,0 +1,137 @@
+<view class="page-background">
+  <view class="page-container">
+    <view
+      wx:for="{{services}}"
+      wx:key="title"
+      class="item"
+    >
+      <view class="item-left">
+        <view>
+          <view class="item-title">{{item.fucking_title}}</view>
+
+          <view class="item-desc">{{item.description}}</view>
+        </view>
+        <view class="item-details">
+          <view
+            class="item-detail"
+            wx:for="{{item.fucking_content}}"
+            wx:key="index"
+            wx:for-item="detailItem"
+          >
+            {{detailItem}}</view
+          >
+        </view>
+        <view class="item-price">
+          <view class="item-symbol">S$ </view>
+          {{item.fucking_price}}/起
+        </view>
+      </view>
+      <view class="item-right">
+        <view
+          class="item-btn"
+          bind:tap="showPopup"
+          data-service="{{item}}"
+          >联系</view
+        >
+      </view>
+
+      <t-dialog
+        visible="{{showDialog}}"
+        title="联系服务"
+        bind:confirm="closeDialog"
+      >
+        <view
+          slot="content"
+          style="margin-top: 26rpx"
+        >
+          <view class="dialog-item"
+            >电话：{{dialogItem.mobile}}
+            <view
+              bind:tap="onPhoneTap"
+              data-item="{{item}}"
+              class="dialog-btn"
+              >复制</view
+            ></view
+          >
+          <view class="dialog-item"
+            >微信：{{dialogItem.wechat_id}}
+            <view
+              bind:tap="onWechatTap"
+              data-item="{{item}}"
+              class="dialog-btn"
+              >复制</view
+            ></view
+          >
+        </view>
+        <view
+          slot="confirm-btn"
+          class="dialog-close-box"
+        >
+          <view
+            bind:tap="closeDialog"
+            class="dialog-close"
+            >关闭</view
+          >
+        </view>
+      </t-dialog>
+    </view>
+  </view>
+
+
+  <t-popup
+    visible="{{visible}}"
+    bind:visible-change="onVisibleChange"
+    placement="center"
+  >
+    <view class="custom-popup">
+      <view class="popup-header">
+        <text class="popup-title">联系信息</text>
+      </view>
+      <view class="popup-content">
+        <t-input
+          borderless="{{true}}"
+          label="姓名"
+          bind:change="onNameChange"
+        />
+        <view class="gender-selector">
+          <text class="label">性别</text>
+          <t-radio-group
+            bind:change="onGenderChange"
+            defaultValue="male"
+          >
+            <t-radio
+              value="1"
+              label="男"
+            />
+            <t-radio
+              value="2"
+              label="女"
+            />
+          </t-radio-group>
+        </view>
+        <t-input
+          label="年龄"
+          type="number"
+          bind:change="onAgeChange"
+        />
+        <t-input
+          label="电话"
+          type="number"
+          bind:change="onPhoneChange"
+        />
+      </view>
+      <view class="popup-footer">
+        <view
+          class="btn-left"
+          bind:tap="closePopup"
+          >取消</view
+        >
+        <view
+          class="btn-right"
+          bind:tap="submitForm"
+          >提交</view
+        >
+      </view>
+    </view>
+  </t-popup>
+</view>

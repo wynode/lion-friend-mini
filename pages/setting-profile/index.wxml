@@ -33,5 +33,27 @@
         data-key="show_followers_and_following"
       />
     </t-cell>
+
+    <view style="margin-top: 24px;"></view>
+    <view style="font-weight: 500; font-size: 26rpx; margin-left: 24rpx; color: black">账号 </view>
+    <t-cell
+      title="退出登录"
+      arrow
+      hover
+      title-style="color: #E34D59"
+      bind:tap="handleLogout"
+    />
   </t-cell-group>
+
 </view>
+
+<!-- 添加确认对话框 -->
+<t-dialog
+  visible="{{showConfirmDialog}}"
+  title="确认退出"
+  content="是否确认退出登录？"
+  confirm-btn="确认"
+  cancel-btn="取消"
+  bind:confirm="confirmLogout"
+  bind:cancel="cancelLogout"
+/>

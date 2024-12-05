@@ -120,9 +120,21 @@
                 {{item.label}}
               </view>
             </view>
+            <view class="filter-more-name"> 可住性别 </view>
+            <view class="filter-price-list">
+              <view
+                wx:for="{{houseGenderFilter.options}}"
+                data-item="{{item}}"
+                wx:key="index"
+                class="{{utils.includes(filter.gender, item.value) ? 'filter-price-item-active' : 'filter-price-item'}}"
+                bind:tap="handleFilterGenderTap"
+              >
+                {{item.label}}
+              </view>
+            </view>
             <view class="filter-more-name">关键字</view>
             <t-input
-              placeholder="请输入关键字"
+              placeholder="请输入标题或介绍"
               class="filter-more-keywords"
               borderless="{{true}}"
               bind:change="handleInputChange"

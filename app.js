@@ -18,6 +18,15 @@ App({
   async onLaunch() {
     // wx.setStorageSync('access_token', '')
     // await this.userLogin()
+    const access_token = wx.getStorageSync('access');
+    if (access_token) {
+      await this.request('/wallet/auto_compute/', 'POST', {
+        // order_id: res.id,
+        // parent: this.data.parent,
+        // second_parent: this.data.second_parent,
+        action: 'login',
+      });
+    }
   },
 
   request(
@@ -36,7 +45,7 @@ App({
     return new Promise((resolve, reject) => {
       // wx.showLoading();
       wx.request({
-        url: `https://api.shichengyouyou.com${url}`,
+        url: `https://api.shichengyy.com${url}`,
         method,
         data,
         header: customeHeader,

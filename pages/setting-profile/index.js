@@ -14,6 +14,8 @@ Page({
       show_favorite: true,
       show_like: true,
     },
+
+    showConfirmDialog: false,
   },
 
   onShow() {
@@ -23,6 +25,61 @@ Page({
         item: res,
       });
     });
+  },
+
+  // 点击退出登录
+  handleLogout() {
+    this.setData({
+      showConfirmDialog: true,
+    });
+  },
+
+  // 取消退出
+  cancelLogout() {
+    this.setData({
+      showConfirmDialog: false,
+    });
+  },
+
+  // 确认退出
+  async confirmLogout() {
+    try {
+      wx.showLoading({
+        title: '退出中...',
+        mask: true,
+      });
+
+      // 清除本地存储的用户信息
+      wx.clearStorageSync();
+
+      wx.hideLoading();
+
+      // 显示退出成功提示
+      wx.showToast({
+        title: '已退出登录',
+        icon: 'success',
+        duration: 2000,
+      });
+
+      // 延迟跳转，确保提示显示完整
+      setTimeout(() => {
+        // 重定向到登录页面
+        wx.reLaunch({
+          url: '/pages/login/index', // 替换为你的登录页面路径
+        });
+      }, 1500);
+    } catch (error) {
+      console.error('Logout error:', error);
+      wx.hideLoading();
+      wx.showToast({
+        title: '退出失败，请重试',
+        icon: 'error',
+      });
+    } finally {
+      this.setData({
+        showConfirmDialog: false,
+      });
+    }
   },
 
   onSwitchChange(e) {

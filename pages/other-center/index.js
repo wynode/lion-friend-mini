@@ -10,6 +10,7 @@ Page({
     date: formatTime('2024-07-25T20:53:41.582552+08:00'),
     articleList: [],
     currentTab: 0,
+    value: 0,
   },
 
   onShow(options) {
@@ -78,25 +79,31 @@ Page({
   async onTabsChange(event = { detail: {} }) {
     const { value } = event.detail;
 
+    console.log(this.data.value, '--', value);
+    this.setData({
+      value: value || '0',
+    });
+
     let sharedIds = this.data.userInfo.deployed_shared_rental || [];
     let hostingIds = this.data.userInfo.deployed_host_family || [];
-    let articleIds = this.data.userInfo.deployed_service || [];
+    let articleIds = this.data.userInfo.deployed_article || [];
 
     if (value === '1') {
-      sharedIds = this.data.userInfo.favorite_shared_rental;
-      hostingIds = this.data.userInfo.favorite_host_family;
-      articleIds = this.data.userInfo.favorite_service;
+      sharedIds = this.data.userInfo.favorite_shared_rental || [];
+      hostingIds = this.data.userInfo.favorite_host_family || [];
+      articleIds = this.data.userInfo.favorite_article || [];
     } else if (value === '2') {
-      sharedIds = this.data.userInfo.liked_shared_rental;
-      hostingIds = this.data.userInfo.liked_host_family;
-      articleIds = this.data.userInfo.liked_service;
+      sharedIds = this.data.userInfo.liked_shared_rental || [];
+      hostingIds = this.data.userInfo.liked_host_family || [];
+      articleIds = this.data.userInfo.liked_article || [];
     }
+    
     let houseList1 = [];
     if (sharedIds.length) {
       const res1 = await app.request('/shared_rental/', 'GET', {
         page: 1,
-        page_size: 100,
-        ids: sharedIds.join(','),
+        page_size: 50,
+        id: sharedIds.join(','),
       });
       houseList1 = res1.results;
     }
@@ -104,8 +111,8 @@ Page({
     if (hostingIds.length) {
       const res2 = await app.request('/host_family/', 'GET', {
         page: 1,
-        page_size: 100,
-        ids: hostingIds.join(','),
+        page_size: 50,
+        id: hostingIds.join(','),
       });
       houseList2 = res2.results;
     }
@@ -113,8 +120,8 @@ Page({
     if (articleIds.length) {
       const res3 = await app.request('/community/articles/', 'GET', {
         page: 1,
-        page_size: 100,
-        ids: articleIds.join(','),
+        page_size: 50,
+        id: articleIds.join(','),
       });
       articleList = res3.results;
     }
